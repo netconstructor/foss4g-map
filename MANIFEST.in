@@ -1,0 +1,3 @@
+include fossapp/config/deployment.ini_tmpl
+recursive-include fossapp/public *
+recursive-include fossapp/templates *
