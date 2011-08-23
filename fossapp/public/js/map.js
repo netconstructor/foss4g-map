@@ -79,7 +79,7 @@ $(document).ready(function(){
 	    bd.map.on("load", mapLoad);
 	}
 
-	bd.map.setView(new L.LatLng(39.7473, -105.01281), 13);
+	bd.map.setView(new L.LatLng(39.74976, -104.99075), 14);
 	
 	var baseMaps = {};
 	var overlayMaps = {};
