@@ -15,6 +15,11 @@ from mapfish.decorators import geojsonify
 #from fossapp.model.drinking_fountain import DrinkingFountain
 #from fossapp.model.bike_shop import BikeShop
 #from fossapp.model.park import Park
+from fossapp.model.bar_pub import BarPub
+from fossapp.model.cafe import Cafe
+from fossapp.model.light_rail import LighRail
+from fossapp.model.restaurant import Restaurant
+from fossapp.model.bicycle_rental import BicycleRental
 
 from fossapp.model.meta import Session
 
@@ -59,12 +64,12 @@ class MapSelectController(BaseController):
         """ Query points first """
         """  ... but only if we're >= zoom 14 """
         if zoom >= 14:
-            drinkingFountainFilter = func.ST_DWithin(wkb_point, DrinkingFountain.geometry_column(), tolerance)
-            drinkingFountainQuery = Session.query(DrinkingFountain).filter(drinkingFountainFilter)
+            lightRailFilter = func.ST_DWithin( wkb_point, LightRail.geometry_column(), tolerance )
+            lightRailQuery = Session.query( LightRail ).filter( lightRailFilter )
             
-            for row in drinkingFountainQuery:
+            for row in lightRailQuery:
                 feature = row.toFeature()
-                feature.properties["feature_type"] = "Drinking Fountain"
+                feature.properties["feature_type"] = "Light Rail"
                 features.append(feature)
                 
             if len(features) > 0:
@@ -72,7 +77,7 @@ class MapSelectController(BaseController):
                 No sense searching for lines/polygons. """
                 return FeatureCollection(features)
     
-            bikeShopFilter = func.ST_DWithin(wkb_point, BikeShop.geometry_column(), tolerance)
+            """bikeShopFilter = func.ST_DWithin(wkb_point, BikeShop.geometry_column(), tolerance)
             bikeShopQuery = Session.query(BikeShop).filter(bikeShopFilter)
             
             for row in bikeShopQuery:
@@ -81,8 +86,8 @@ class MapSelectController(BaseController):
                 features.append(feature)
                 
             if len(features) > 0:
-                """ If we found some points, go ahead and return them.
-                No sense searching for lines/polygons. """
+                #If we found some points, go ahead and return them.
+                #No sense searching for lines/polygons.
                 return FeatureCollection(features)
                 
             parkFilter = func.ST_DWithin(wkb_point, Park.geometry_column(), tolerance)
@@ -94,12 +99,12 @@ class MapSelectController(BaseController):
                 features.append(feature)
                 
             if len(features) > 0:
-                """ If we found some points, go ahead and return them.
-                No sense searching for lines/polygons. """
+                #If we found some points, go ahead and return them.
+                #No sense searching for lines/polygons.
                 return FeatureCollection(features)
             
-        """ Then query lines """
-        """ Bike Paths first """
+        # Then query lines
+        # Bike Paths first
         bikePathFilter = func.ST_DWithin(wkb_point, BikePath.geometry_column(), tolerance)
         bikePathQuery = Session.query(BikePath).filter(bikePathFilter)
         
@@ -109,23 +114,9 @@ class MapSelectController(BaseController):
             features.append(feature)
             
         if len(features) > 0:
-            """ If we found some bike paths, go ahead and return them.
-            No sense searching for foot paths or polygons. """
-            return FeatureCollection(features)
-        
-        """ Then Foot Paths """
-        footPathFilter = func.ST_DWithin(wkb_point, FootPath.geometry_column(), tolerance)
-        footPathQuery = Session.query(FootPath).filter(footPathFilter)
-        
-        for row in footPathQuery:
-            feature = row.toFeature()
-            feature.properties["feature_type"] = "Foot Path"
-            features.append( feature )
-            
-        if len(features) > 0:
-            """ If we found some foot paths, go ahead and return them.
-            No sense searching for polygons. """
-            return FeatureCollection( features )
+            # If we found some bike paths, go ahead and return them.
+            #No sense searching for foot paths or polygons.
+            return FeatureCollection(features)"""
         
         return FeatureCollection( features )
 

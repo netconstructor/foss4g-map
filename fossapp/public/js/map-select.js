@@ -13,7 +13,7 @@ function mapLoad(){
 function handleMapClick( event ) {
     $("#current-feature-container").hide();
     $("#current-feature-container div.content").html("");
-    bd.bikePathLayer.clearLayers();
+    bd.poiLayer.clearLayers();
     $.getJSON("select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + bd.map.getZoom(), function(data){
         if (data && data.features && data.features.length){
             var feature = data.features[0];
@@ -35,7 +35,7 @@ function handleMapClick( event ) {
                     imageUrl = "/img/park-white.png";
                     break;
             }
-            bd.bikePathLayer.addGeoJSON(feature);
+            bd.poiLayer.addGeoJSON(feature);
             var is_bike_trail_and_has_name = false;
             if (feature.properties.feature_type == "Bike Path" && feature.properties.name && feature.properties.name.length > 0){
                 /*$.each(bd.searchTrails, function(i, o){
