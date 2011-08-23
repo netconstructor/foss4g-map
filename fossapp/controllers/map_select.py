@@ -17,7 +17,7 @@ from mapfish.decorators import geojsonify
 #from fossapp.model.park import Park
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
-from fossapp.model.light_rail import LighRail
+from fossapp.model.light_rail import LightRail
 from fossapp.model.restaurant import Restaurant
 from fossapp.model.bicycle_rental import BicycleRental
 
