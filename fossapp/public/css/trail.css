@@ -1,0 +1,24 @@
+#trail-main{
+	height: 400px;
+}
+#left{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+#left-inner{
+    height: 100%;
+    padding: 10px;
+}
+#right{
+	float: right;
+	width: 50%;
+	height: 100%;
+}
+#trail-map{
+	height: 100%;
+	-moz-box-shadow: 5px 5px 5px #D2D2D2;
+	-webkit-box-shadow: 5px 5px 5px #333;
+	box-shadow: 5px 5px 5px #999;
+	border: 1px solid #666;
+}

@@ -1,0 +1,53 @@
+h1.logo{
+	font-size: 55px;
+	text-shadow: 4px 4px 4px #ddd;
+	font-family: 'Corben', arial, serif;
+	display: inline;
+}
+h1.logo a{
+	/*color: #93c116;*/
+	color: #455268;
+	-webkit-transition: all .25s linear;
+	-moz-transition: all .25s linear;
+	text-decoration: none;
+}
+h1.logo a:hover{
+	/*color: #668811 !important;*/
+	color: #313c53 !important;
+}
+h2.logo{
+	font-family: 'News Cycle', arial, serif;
+	font-size: 30px;
+	text-shadow: 2px 2px 2px #ddd;
+	display: inline;
+	/*color: #668811;*/
+	color: #3c3c53;
+}
+.font-11{
+	font-size: 1.1em !important;
+}
+.font-12{
+	font-size: 1.2em !important;
+}
+.os-project{
+    background-color: #f7f7f7;
+    border: 1px solid #dfdfdf;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-box-shadow: 5px 5px 5px #d2d2d2;
+    -webkit-box-shadow: 5px 5px 5px #d2d2d2;
+    box-shadow: 5px 5px 5px #d2d2d2;
+    width: 45%;
+    margin: 0 2% 2% 0;
+    float: left;
+    padding: 10px;
+}
+.os-project h3{
+    margin: 0 0 0.4em 0;
+    font-size: 2em;
+    text-align: center;
+    /*color: #668811;*/
+    color: #455268;
+    font-family: 'News Cycle', arial, serif;
+}

@@ -1,0 +1,23 @@
+import logging
+
+from pylons import request, response, session, tmpl_context as c, url
+from pylons.controllers.util import abort, redirect
+
+from bikedenapp.lib.base import BaseController, render
+from bikedenapp.lib.version import Version
+
+log = logging.getLogger(__name__)
+
+class MainController(BaseController):
+
+    def __init__(self):
+        self.version = Version(session, request)
+
+    def index(self):
+        # Return a rendered template
+        #return render('/main.mako')
+        # or, return a string
+        #return 'Hello World'
+        if self.version.getVersion() == "mobile":
+            return render("/m.index.html")
+        return render('/index.html')

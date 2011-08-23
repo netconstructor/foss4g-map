@@ -1,0 +1,76 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title><%block name="title"/></title>
+	
+	<meta name="description" content="Discover Denver, CO bike trails and trail-side amenities like restrooms, drinking foutains, etc.">
+	<meta name="author" content="Jason Sanford">
+	
+	<!-- Facebook Open Graph Tags -->
+	<meta property="og:title" content="BikeDenver.co" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://bikedenver.co" />
+	<meta property="og:image" content="http://bikedenver.co/bd.png" />
+	<meta property="og:site_name" content="BikeDenver" />
+	<meta property="fb:admins" content="1210270240" />
+	
+	<!-- Blueprint -->
+	<link rel="stylesheet" href="/css/blueprint/screen.css" media="screen, projection">
+	<link rel="stylesheet" href="/css/blueprint/print.css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="docs/css/blueprint/ie.css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="/css/screen.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Corben:bold&v1' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=News+Cycle&v1' rel='stylesheet' type='text/css'>
+	<%block name="css"/>
+</head>
+<body>
+	<div class="container">
+		<h1 class="logo"><a href="/">BikeDenver</a></h1><h2 class="logo">.co</h2>
+		<h3 class="alt">Your source for bike trail maps and information in the Denver metro area</h3>
+		
+		<ul class="nav">
+			<li><a href="/trails">Trails</a></li>  
+			<li><a href="/map">Map</a></li> 
+			<li><a href="/about">About</a></li>
+			<li><a class="twitter-link" href="http://twitter.com/BikeDenverCO">@BikeDenverCO</a></li>
+		</ul>
+		
+		<!-- Begin Content -->
+		${self.body()}
+		<!-- End Content -->
+		<div class="clearfix"></div>
+		<p id="social">
+			<g:plusone size="medium" count="false"></g:plusone>
+			<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://bikedenver.co" data-text="Explore Denver's extensive bike trail system with maps, trail descriptions and more -BikeDenver.co" data-count="none">Tweet</a>
+			<iframe src="http://www.facebook.com/plugins/like.php?app_id=250089081669084&amp;href&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+		</p>
+		
+		<hr />
+		
+		<p class="quiet">&copy; 2011 <a href="http://bikedenver.co">BikeDenver.co</a> | <a href="/mobile">view mobile version</a></p>
+			
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script>!window.jQuery && document.write(unescape('%3Cscript src="lib/jquery/jquery-1.6.1.min.js"%3E%3C/script%3E'))</script>
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+	<!-- Begin Scripts -->
+	<%block name="scripts"/>
+	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	<!-- End Scripts -->
+	<!--<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']]; // Change UA-XXXXX-X to be your site's ID
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>-->
+</body>
+</html>

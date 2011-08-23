@@ -1,0 +1,125 @@
+var bd = {};
+
+bd.baseMaps = [
+	{
+		name: "Minimal",
+		id: "cm_bd",
+		initiallyVisible: true,
+		config: {
+			url: "http://{s}.tile.cloudmade.com/cadf22ef416446fd9b3b890052efa205/41027/256/{z}/{x}/{y}.png",
+			options: {
+				attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+				subdomains: ["a", "b", "c"],
+				minZoom: 6,
+				maxZoom: 19
+			}
+		}
+	},{
+		name: "Road Map",
+		id: "mq_osm",
+		initiallyVisible: false,
+		config: {
+			url: "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
+			options: {
+				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>',
+				subdomains: ["otile1", "otile2", "otile3", "otile4"],
+				minZoom: 4,
+				maxZoom: 19
+			}
+		}
+	},{
+		name: "Aerial",
+		id: "mq_oa",
+		initiallyVisible: false,
+		config: {
+			url: "http://{s}.mqcdn.com/naip/{z}/{x}/{y}.png",
+			options: {
+				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>',
+				subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
+				minZoom: 4,
+				maxZoom: 18
+			}
+		}
+	},{
+		name: "Topo",
+		id: "usgs_topo",
+		initiallyVisible: false,
+		config: {
+			url: "http://services.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer/tile/{z}/{y}/{x}",
+			options: {
+				attribution: 'Tiles Courtesy of <a href="http://www.esri.com/" target="_blank">Esri</a>',
+				minZoom: 4,
+				maxZoom: 15
+			}
+		}
+	}
+];
+
+bd.overlayMaps = [
+	{
+		name: "Bike Paths",
+		id: "bike_path",
+		initiallyVisible: true,
+		layerType: "tiled",
+		config: {
+			url: "/tiles/bike/{z}/{x}/{y}.png",
+			options: {
+				minZoom: 10,
+				maxZoom: 17
+			}
+		}
+	}
+];
+
+$(document).ready(function(){
+
+	bd.map = new L.Map("map-container", {});
+	
+	if (mapLoad){
+	    bd.map.on("load", mapLoad);
+	}
+
+	bd.map.setView(new L.LatLng(39.7473, -105.01281), 10);
+	
+	var baseMaps = {};
+	var overlayMaps = {};
+
+	$.each(bd.baseMaps, function(i, o){
+		o.layer = createTiledMapLayer(o.config);
+		if (o.initiallyVisible) bd.map.addLayer(o.layer);
+		baseMaps[o.name] = o.layer;
+	});
+	$.each(bd.overlayMaps, function(i, o){
+		o.layer = createTiledMapLayer(o.config);
+		if (o.initiallyVisible){
+			bd.map.addLayer(o.layer);
+		}
+		overlayMaps[o.name] = o.layer;
+	});
+	
+	if (window.handleMapClick){
+	    bd.map.on("click", handleMapClick);
+	}
+	
+	bd.layersControl = new L.Control.Layers(baseMaps, overlayMaps);
+	bd.map.addControl(bd.layersControl);
+	
+	bd.bikePathLayer = new L.GeoJSON();
+	bd.bikePathLayer.on("featureparse", function(e){
+		var options = {
+			color: "#f00",
+			weight: 5,
+			opacity: 0.6
+		};
+        if (e.geometryType != "Point"){
+            e.layer.setStyle(options);
+        }
+	});
+	bd.map.addLayer(bd.bikePathLayer);
+
+});
+
+function createTiledMapLayer(o){
+	if (!o.options.subdomains) o.options.subdomains = [];
+	return new L.TileLayer(o.url, o.options);
+}

@@ -20,7 +20,9 @@ def make_map(config):
 
     # CUSTOM ROUTES HERE
 
+    map.connect( "/", controller="main", action="index" )
     map.resource("{controller}", "{controller}")
+    map.connect("/select", controller="map_select")
 
     # END CUSTOM ROUTES HERE
 

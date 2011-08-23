@@ -1,0 +1,87 @@
+<%inherit file="base.html" />
+
+<%block name="title">BikeDenver.co - About</%block>
+
+<%block name="scripts"></%block>
+
+<h2 class="bar">What is this?</h2>
+
+<p class="font-12"></p>
+
+<h2 class="bar">Who made this?</h2>
+
+<p class="font-12">Some guy named <a href="http://geojason.info">Jason</a>.</p>
+
+<h2 id="contribute" class="bar">Contribute</h2>
+
+<p class="font-12">All of the maps you see on this site are created from <a href="http://openstreetmap.org">OpenStreetMap</a> data. OpenStreetMap is a free wiki map of the world. This means that you can contribute your local knowledge to a map that can used by anyone. There is a <a href="http://www.meetup.com/OSM-Colorado/">Denver OpenStreetMap meetup group</a> that you should join if you are interested in OpenStreetMap.</p>
+
+<h2 class="bar">Open Source + Open Data</h2>
+
+<p class="font-12">This application would not have been possible if it weren't for a number of open source and open data projects. Do yourself a favor and check out a few of the greate projects below.</p>
+
+<div class="os-project">
+
+    <h3>Leaflet</h3>
+
+    <p class="font-11">
+    Leaflet is a JavaScript web mapping library from <a href="http://cloudmade.com/">CloudMade</a> that creates the "slippy" map interface. This map can be easily customized by adding different base maps, overlays, markers, lines, etc. Leaflet is similar to products like <a href="http://openlayers.org/">OpenLayers</a> and the <a href="http://code.google.com/apis/maps/documentation/javascript/">Google Maps API</a>, but is different as it is both light weight and open source making this a good solution for mobile applications or disconnected use.</p>
+    
+    <ul>
+        <li><a href="http://leaflet.cloudmade.com">Leaflet Website</a></li>
+        <li><a href="https://github.com/CloudMade/Leaflet">Leaflet Source Code</a></li>
+    </ul>
+
+</div>
+
+<div class="os-project">
+
+    <h3>TileMill</h3>
+
+    <p class="font-11">TileMill is a browser-based web map design studio from the folks over at <a href="http://mapbox.com">MapBox</a>. TileMill lets you create <a href="http://tiles.mapbox.com/mapbox#!/map/control-room">beautiful maps</a> using a <a href="https://github.com/mapbox/carto">CSS-like syntax</a>, which is much more favorable than using <a href="http://www.opengeospatial.org/standards/sld">SLD</a>. Maps can be exported in an open <a href="http://mapbox.github.com/mbtiles-spec/">mbtiles format</a>, which is just a SQLite database. Map tiles can be served from this file from a few different software packages including <a href="http://mapbox.com/#/tilestream">MapBox's TileStream</a> and <a href="http://tilestache.org/">TileStache</a>.</p>
+    
+    <ul>
+        <li><a href="http://tilemill.com/">TileMill Website</a></li>
+        <li><a href="https://github.com/mapbox/tilemill">TileMill Source Code</a></li>
+    </ul>
+
+</div>
+
+<div class="os-project">
+
+    <h3>TileStache</h3>
+
+    <p class="font-11"></p>
+    
+    <ul>
+        <li><a href="http://tilestache.org/">TileStache Website</a></li>
+        <li><a href="https://github.com/migurski/TileStache">TileStache Source Code</a></li>
+    </ul>
+
+</div>
+
+<div class="os-project">
+
+    <h3>MapFish</h3>
+
+    <p class="font-11">MapFish is an open source framework for creating web mapping applications. It is built on the Pylons web framework and integrates tightly with a number of other open source projects (<a href="http://www.sqlalchemy.org/">SQLAlchemy</a>, <a href="http://www.geoalchemy.org/">GeoAlchemy</a>, <a href="http://trac.gispython.org/lab/wiki/Shapely">Shapely</a>). MapFish works by creating web services that can Create, Read, Update and Delete (CRUD) geographic features via HTTP POST, GET, PUT and DELETEs.</p>
+    
+    <ul>
+        <li><a href="http://mapfish.org/">MapFish Website</a></li>
+        <li><a href="http://trac.mapfish.org/trac/mapfish/wiki/DownloadSvn">MapFish Source Code</a></li>
+    </ul>
+
+</div>
+
+<div class="os-project">
+
+    <h3>PostGIS</h3>
+
+    <p class="font-11"></p>
+    
+    <ul>
+        <li><a href="http://postgis.org/">PostGIS Website</a></li>
+        <li><a href="http://postgis.org/download/">PostGIS Source Code</a></li>
+    </ul>
+
+</div>

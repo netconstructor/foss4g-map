@@ -1,0 +1,34 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="description" content="Discover Denver, CO bike trails and trail-side amenities like restrooms, drinking foutains, etc.">
+	<meta name="author" content="Jason Sanford">
+	<!-- Facebook Open Graph Tags -->
+	<meta property="og:title" content="BikeDenver.co" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://bikedenver.co" />
+	<meta property="og:image" content="http://bikedenver.co/bd.png" />
+	<meta property="og:site_name" content="BikeDenver" />
+	<meta property="fb:admins" content="1210270240" />
+	
+	<title><%block name="title"/></title>
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.css" />
+	<%block name="css"/>
+</head>
+<body>
+    ${self.body()}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="lib/jquery/jquery-1.6.1.min.js"%3E%3C/script%3E'))</script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b1/jquery.mobile-1.0b1.min.js"></script>
+    <%block name="scripts"/>
+</body>
+
+</html>
