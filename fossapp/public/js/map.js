@@ -57,15 +57,15 @@ bd.baseMaps = [
 
 bd.overlayMaps = [
 	{
-		name: "Bike Paths",
-		id: "bike_path",
+		name: "Local Amenities",
+		id: "foss4g",
 		initiallyVisible: true,
 		layerType: "tiled",
 		config: {
-			url: "/tiles/bike/{z}/{x}/{y}.png",
+			url: "/tiles/foss4g/{z}/{x}/{y}.png",
 			options: {
 				minZoom: 10,
-				maxZoom: 17
+				maxZoom: 18
 			}
 		}
 	}
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	    bd.map.on("load", mapLoad);
 	}
 
-	bd.map.setView(new L.LatLng(39.7473, -105.01281), 10);
+	bd.map.setView(new L.LatLng(39.7473, -105.01281), 13);
 	
 	var baseMaps = {};
 	var overlayMaps = {};
@@ -104,8 +104,8 @@ $(document).ready(function(){
 	bd.layersControl = new L.Control.Layers(baseMaps, overlayMaps);
 	bd.map.addControl(bd.layersControl);
 	
-	bd.bikePathLayer = new L.GeoJSON();
-	bd.bikePathLayer.on("featureparse", function(e){
+	bd.poiLayer = new L.GeoJSON();
+	bd.poiLayer.on("featureparse", function(e){
 		var options = {
 			color: "#f00",
 			weight: 5,
@@ -115,7 +115,7 @@ $(document).ready(function(){
             e.layer.setStyle(options);
         }
 	});
-	bd.map.addLayer(bd.bikePathLayer);
+	bd.map.addLayer(bd.poiLayer);
 
 });
 
