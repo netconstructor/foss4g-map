@@ -3,9 +3,9 @@
 from pylons import request, response, session, tmpl_context as c
 from pylons.controllers.util import abort, redirect
 
-from bikedenapp.lib.base import BaseController, render
-from bikedenapp.model.trail_desc import TrailDesc
-from bikedenapp.model.meta import Session
+from fossapp.lib.base import BaseController, render
+from fossapp.model.trail_desc import TrailDesc
+from fossapp.model.meta import Session
 
 import json
 

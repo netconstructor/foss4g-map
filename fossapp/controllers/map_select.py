@@ -5,18 +5,18 @@ from math import cos, pi
 from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 
-from bikedenapp.lib.base import BaseController, render
+from fossapp.lib.base import BaseController, render
 
 from mapfish.protocol import Protocol, create_default_filter
 from mapfish.decorators import geojsonify
 
-from bikedenapp.model.bike_path import BikePath
-from bikedenapp.model.foot_path import FootPath
-from bikedenapp.model.drinking_fountain import DrinkingFountain
-from bikedenapp.model.bike_shop import BikeShop
-from bikedenapp.model.park import Park
+from fossapp.model.bike_path import BikePath
+from fossapp.model.foot_path import FootPath
+from fossapp.model.drinking_fountain import DrinkingFountain
+from fossapp.model.bike_shop import BikeShop
+from fossapp.model.park import Park
 
-from bikedenapp.model.meta import Session
+from fossapp.model.meta import Session
 
 from shapely.geometry.point import Point
 from geoalchemy import WKBSpatialElement
