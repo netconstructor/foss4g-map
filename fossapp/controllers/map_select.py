@@ -10,11 +10,11 @@ from fossapp.lib.base import BaseController, render
 from mapfish.protocol import Protocol, create_default_filter
 from mapfish.decorators import geojsonify
 
-from fossapp.model.bike_path import BikePath
-from fossapp.model.foot_path import FootPath
-from fossapp.model.drinking_fountain import DrinkingFountain
-from fossapp.model.bike_shop import BikeShop
-from fossapp.model.park import Park
+#from fossapp.model.bike_path import BikePath
+#from fossapp.model.foot_path import FootPath
+#from fossapp.model.drinking_fountain import DrinkingFountain
+#from fossapp.model.bike_shop import BikeShop
+#from fossapp.model.park import Park
 
 from fossapp.model.meta import Session
 
@@ -34,25 +34,25 @@ class MapSelectController(BaseController):
     @geojsonify
     def index(self):
         if "lat" in request.params:
-            lat = float(request.params["lat"])
+            lat = float( request.params["lat"] )
         else:
             return {"error": True, "message": "No \"lat\" parameter was found."}
         
         if "lon" in request.params:
-            lon = float(request.params["lon"])
+            lon = float( request.params["lon"] )
         else:
             return {"error": True, "message": "No \"lon\" parameter was found."}
         
         if "zoom" in request.params:
-            zoom = int(request.params["zoom"])
+            zoom = int( request.params["zoom"] )
         else:
             return {"error": True, "message": "No \"zoom\" parameter was found."}
             
         point = Point(lon, lat)
         wkb_point = WKBSpatialElement(buffer(point.wkb), 4326)
         
-        distance_meters = pow(1.8, (20 - zoom))
-        tolerance = metersToDegrees(distance_meters, lat)
+        distance_meters = pow( 1.8, ( 20 - zoom ) )
+        tolerance = metersToDegrees( distance_meters, lat )
         
         features = []
         
@@ -120,17 +120,14 @@ class MapSelectController(BaseController):
         for row in footPathQuery:
             feature = row.toFeature()
             feature.properties["feature_type"] = "Foot Path"
-            features.append(feature)
+            features.append( feature )
             
         if len(features) > 0:
             """ If we found some foot paths, go ahead and return them.
             No sense searching for polygons. """
-            return FeatureCollection(features)
+            return FeatureCollection( features )
         
-        """ Finally, query polygons (none for now) """
-        
-        """ return {"lat": lat, "lon": lon, "zoom": zoom} """
-        return FeatureCollection(features)
+        return FeatureCollection( features )
 
 def metersToDegrees(meters, currentLatitude):
     lat = degreesToRadians(currentLatitude)

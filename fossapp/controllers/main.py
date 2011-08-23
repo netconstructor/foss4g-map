@@ -14,10 +14,6 @@ class MainController(BaseController):
         self.version = Version(session, request)
 
     def index(self):
-        # Return a rendered template
-        #return render('/main.mako')
-        # or, return a string
-        #return 'Hello World'
         if self.version.getVersion() == "mobile":
-            return render("/m.index.html")
-        return render('/index.html')
+            return render( "/m.index.html" )
+        return render( "/index.html" )
