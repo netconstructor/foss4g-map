@@ -10,11 +10,6 @@ from fossapp.lib.base import BaseController, render
 from mapfish.protocol import Protocol, create_default_filter
 from mapfish.decorators import geojsonify
 
-#from fossapp.model.bike_path import BikePath
-#from fossapp.model.foot_path import FootPath
-#from fossapp.model.drinking_fountain import DrinkingFountain
-#from fossapp.model.bike_shop import BikeShop
-#from fossapp.model.park import Park
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
@@ -61,9 +56,17 @@ class MapSelectController(BaseController):
         
         features = []
         
-        """ Query points first """
-        """  ... but only if we're >= zoom 14 """
-        if zoom >= 14:
+        #
+        # Query points first
+        #
+        if zoom >= 13:
+            #
+            # These layers aren't visible until we hit zoom 13
+            #
+        
+            #
+            # Light Rail query
+            #
             lightRailFilter = func.ST_DWithin( wkb_point, LightRail.geometry_column(), tolerance )
             lightRailQuery = Session.query( LightRail ).filter( lightRailFilter )
             
@@ -72,65 +75,84 @@ class MapSelectController(BaseController):
                 feature.properties["feature_type"] = "Light Rail"
                 features.append(feature)
                 
-            if len(features) > 0:
-                """ If we found some points, go ahead and return them.
-                No sense searching for lines/polygons. """
+            if len( features ) > 0:
                 return FeatureCollection(features)
+                
+            if zoom >= 14:
+                #
+                # These layers aren't visible until we hit zoom 14
+                #
+                
+                #
+                # Bar/Pub query
+                #
+                barPubFilter = func.ST_DWithin( wkb_point, BarPub.geometry_column(), tolerance )
+                barPubQuery = Session.query( BarPub ).filter ( barPubFilter )
+                
+                for row in barPubQuery:
+                    feature = row.toFeature()
+                    feature.properties["feature_type"] = "Bar/Pub"
+                    features.append( feature )
+                    
+                if len( features ) > 0:
+                    return FeatureCollection( features )
+                    
+                #
+                # Cafe query
+                #
+                cafeFilter = func.ST_DWithin( wkb_point, Cafe.geometry_column(), tolerance )
+                cafeQuery = Session.query( Cafe ).filter ( cafeFilter )
+                
+                for row in cafeQuery:
+                    feature = row.toFeature()
+                    feature.properties["feature_type"] = "Cafe"
+                    features.append( feature )
+                    
+                if len( features ) > 0:
+                    return FeatureCollection( features )
+                
+                #
+                # Restaurant query
+                #
+                restaurantFilter = func.ST_DWithin( wkb_point, Restaurant.geometry_column(), tolerance )
+                restaurantQuery = Session.query( Restaurant ).filter ( restaurantFilter )
+                
+                for row in restaurantQuery:
+                    feature = row.toFeature()
+                    feature.properties["feature_type"] = "Restaurant"
+                    features.append( feature )
+                    
+                if len( features ) > 0:
+                    return FeatureCollection( features )
+                
+                #
+                # Bicycle Rental query
+                #
+                bicycleRentalFilter = func.ST_DWithin( wkb_point, BicycleRental.geometry_column(), tolerance )
+                bicycleRentalQuery = Session.query( BicycleRental ).filter ( bicycleRentalFilter )
+                
+                for row in bicycleRentalQuery:
+                    feature = row.toFeature()
+                    feature.properties["feature_type"] = "Bicycle Rental"
+                    features.append( feature )
+                    
+                if len( features ) > 0:
+                    return FeatureCollection( features )
     
-            """bikeShopFilter = func.ST_DWithin(wkb_point, BikeShop.geometry_column(), tolerance)
-            bikeShopQuery = Session.query(BikeShop).filter(bikeShopFilter)
-            
-            for row in bikeShopQuery:
-                feature = row.toFeature()
-                feature.properties["feature_type"] = "Bike Shop"
-                features.append(feature)
-                
-            if len(features) > 0:
-                #If we found some points, go ahead and return them.
-                #No sense searching for lines/polygons.
-                return FeatureCollection(features)
-                
-            parkFilter = func.ST_DWithin(wkb_point, Park.geometry_column(), tolerance)
-            parkQuery = Session.query(Park).filter(parkFilter)
-            
-            for row in parkQuery:
-                feature = row.toFeature()
-                feature.properties["feature_type"] = "Park"
-                features.append(feature)
-                
-            if len(features) > 0:
-                #If we found some points, go ahead and return them.
-                #No sense searching for lines/polygons.
-                return FeatureCollection(features)
-            
-        # Then query lines
-        # Bike Paths first
-        bikePathFilter = func.ST_DWithin(wkb_point, BikePath.geometry_column(), tolerance)
-        bikePathQuery = Session.query(BikePath).filter(bikePathFilter)
-        
-        for row in bikePathQuery:
-            feature = row.toFeature()
-            feature.properties["feature_type"] = "Bike Path"
-            features.append(feature)
-            
-        if len(features) > 0:
-            # If we found some bike paths, go ahead and return them.
-            #No sense searching for foot paths or polygons.
-            return FeatureCollection(features)"""
         
         return FeatureCollection( features )
 
-def metersToDegrees(meters, currentLatitude):
-    lat = degreesToRadians(currentLatitude)
+def metersToDegrees( meters, currentLatitude ):
+    lat = degreesToRadians( currentLatitude )
 
     p1 = 111412.84
     p2 = -93.5
     p3 = 0.118
 
-    longlen = (p1 * cos(lat)) + (p2 * cos(3 * lat)) + (p3 * cos(5 * lat));
+    longlen = ( p1 * cos( lat ) ) + ( p2 * cos( 3 * lat ) ) + ( p3 * cos( 5 * lat ) );
 
-    return (1 / longlen) * meters
+    return ( 1 / longlen ) * meters
 
-def degreesToRadians(deg):
-    conv_factor = (2.0 * pi)/360.0
+def degreesToRadians( deg ):
+    conv_factor = ( 2.0 * pi ) / 360.0
     return deg * conv_factor
