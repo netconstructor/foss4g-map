@@ -1,7 +1,7 @@
 import site
 import os, sys
 
-site.addsitedir('/home/ubuntu/env22/lib/python2.6/site-packages')
+site.addsitedir('/home/ubuntu/env/lib/python2.6/site-packages')
 
 sys.path.append('/home/ubuntu/FossApp')
 os.environ['PYTHON_EGG_CACHE'] = '/var/cache/apache2/python-eggs'
