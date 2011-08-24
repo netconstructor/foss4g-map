@@ -61,7 +61,7 @@ class MapSelectController(BaseController):
         #
         if zoom >= 9:
             #
-            # These layers aren't visible until we hit zoom 13
+            # These layers aren't visible until we hit zoom 9
             #
         
             #
@@ -80,7 +80,7 @@ class MapSelectController(BaseController):
                 
             if zoom >= 16:
                 #
-                # These layers aren't visible until we hit zoom 14
+                # These layers aren't visible until we hit zoom 16
                 #
                 
                 #
