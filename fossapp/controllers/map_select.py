@@ -73,7 +73,7 @@ class MapSelectController(BaseController):
             
             for row in hotelQuery:
                 feature = row.toFeature()
-                feature.properties["feature_type"] = "Hotel"
+                feature.properties["feature_type"] = "Hotel/Conference"
                 features.append(feature)
                 
             if len( features ) > 0:

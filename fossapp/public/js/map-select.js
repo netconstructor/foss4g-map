@@ -34,6 +34,9 @@ function handleMapClick( event ) {
                 case "Bicycle Rental":
                     imageUrl = "/img/bicycle-rental.png";
                     break;
+                case "Hotel/Conference":
+                    imageUrl = "/img/hotel.png";
+                    break;
             }
             bd.poiLayer.addGeoJSON( feature );
             $("#current-feature-type").html( feature.properties.feature_type );
