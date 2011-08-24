@@ -68,7 +68,7 @@ class MapSelectController(BaseController):
             #
             # Hotel query, commented out for now, doesn't exist in PostGIS/MapFish'
             #
-            """hotelFilter = func.ST_DWithin( wkb_point, Hotel.geometry_column(), tolerance )
+            hotelFilter = func.ST_DWithin( wkb_point, Hotel.geometry_column(), tolerance )
             hotelQuery = Session.query( Hotel ).filter( hotelFilter )
             
             for row in hotelQuery:
@@ -77,7 +77,7 @@ class MapSelectController(BaseController):
                 features.append(feature)
                 
             if len( features ) > 0:
-                return FeatureCollection(features)"""
+                return FeatureCollection(features)
         
             #
             # Light Rail query
