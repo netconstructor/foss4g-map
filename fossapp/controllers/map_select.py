@@ -10,7 +10,7 @@ from fossapp.lib.base import BaseController, render
 from mapfish.protocol import Protocol, create_default_filter
 from mapfish.decorators import geojsonify
 
-#from fossapp.model.hotel import Hotel
+from fossapp.model.hotel import Hotel
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
