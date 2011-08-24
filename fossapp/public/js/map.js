@@ -10,7 +10,7 @@ bd.baseMaps = [
 			options: {
 				attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
 				subdomains: ["a", "b", "c"],
-				minZoom: 6,
+				minZoom: 10,
 				maxZoom: 19
 			}
 		}
@@ -24,7 +24,7 @@ bd.baseMaps = [
 				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>',
 				subdomains: ["otile1", "otile2", "otile3", "otile4"],
 				minZoom: 4,
-				maxZoom: 19
+				maxZoom: 18
 			}
 		}
 	},{
@@ -36,11 +36,11 @@ bd.baseMaps = [
 			options: {
 				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>',
 				subdomains: ["oatile1", "oatile2", "oatile3", "oatile4"],
-				minZoom: 4,
+				minZoom: 10,
 				maxZoom: 18
 			}
 		}
-	},{
+	}/*,{
 		name: "Topo",
 		id: "usgs_topo",
 		initiallyVisible: false,
@@ -48,11 +48,11 @@ bd.baseMaps = [
 			url: "http://services.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer/tile/{z}/{y}/{x}",
 			options: {
 				attribution: 'Tiles Courtesy of <a href="http://www.esri.com/" target="_blank">Esri</a>',
-				minZoom: 4,
+				minZoom: 10,
 				maxZoom: 15
 			}
 		}
-	}
+	}*/
 ];
 
 bd.overlayMaps = [
@@ -73,7 +73,10 @@ bd.overlayMaps = [
 
 $(document).ready(function(){
 
-	bd.map = new L.Map("map-container", {});
+	bd.map = new L.Map("map-container", {
+	    minZoom: 10,
+	    maxZoom: 18
+	});
 	
 	if (mapLoad){
 	    bd.map.on("load", mapLoad);
