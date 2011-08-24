@@ -10,6 +10,7 @@ from fossapp.lib.base import BaseController, render
 from mapfish.protocol import Protocol, create_default_filter
 from mapfish.decorators import geojsonify
 
+#from fossapp.model.hotel import Hotel
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
@@ -36,20 +37,20 @@ class MapSelectController(BaseController):
         if "lat" in request.params:
             lat = float( request.params["lat"] )
         else:
-            return {"error": True, "message": "No \"lat\" parameter was found."}
+            return { "error": True, "message": "No \"lat\" parameter was found." }
         
         if "lon" in request.params:
             lon = float( request.params["lon"] )
         else:
-            return {"error": True, "message": "No \"lon\" parameter was found."}
+            return { "error": True, "message": "No \"lon\" parameter was found." }
         
         if "zoom" in request.params:
             zoom = int( request.params["zoom"] )
         else:
-            return {"error": True, "message": "No \"zoom\" parameter was found."}
+            return { "error": True, "message": "No \"zoom\" parameter was found." }
             
         point = Point(lon, lat)
-        wkb_point = WKBSpatialElement(buffer(point.wkb), 4326)
+        wkb_point = WKBSpatialElement( buffer( point.wkb ), 4326 )
         
         distance_meters = pow( 1.8, ( 20 - zoom ) )
         tolerance = metersToDegrees( distance_meters, lat )
@@ -63,6 +64,20 @@ class MapSelectController(BaseController):
             #
             # These layers aren't visible until we hit zoom 9
             #
+            
+            #
+            # Hotel query, commented out for now, doesn't exist in PostGIS/MapFish'
+            #
+            """hotelFilter = func.ST_DWithin( wkb_point, Hotel.geometry_column(), tolerance )
+            hotelQuery = Session.query( Hotel ).filter( hotelFilter )
+            
+            for row in hotelQuery:
+                feature = row.toFeature()
+                feature.properties["feature_type"] = "Hotel"
+                features.append(feature)
+                
+            if len( features ) > 0:
+                return FeatureCollection(features)"""
         
             #
             # Light Rail query
