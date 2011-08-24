@@ -1,3 +1,4 @@
 development.ini
 *esproj*
 data
+*.pyc
