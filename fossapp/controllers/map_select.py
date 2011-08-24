@@ -14,6 +14,7 @@ from fossapp.model.hotel import Hotel
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
+#from fossapp.model.light_rail_line import LightRailLine
 from fossapp.model.restaurant import Restaurant
 from fossapp.model.bicycle_rental import BicycleRental
 
@@ -60,11 +61,11 @@ class MapSelectController(BaseController):
         #
         # Query points first
         #
+        
+        #
+        # These layers aren't visible until we hit zoom 9
+        #
         if zoom >= 9:
-            #
-            # These layers aren't visible until we hit zoom 9
-            #
-            
             #
             # Hotel query, commented out for now, doesn't exist in PostGIS/MapFish'
             #
@@ -77,18 +78,18 @@ class MapSelectController(BaseController):
                 features.append(feature)
                 
             if len( features ) > 0:
-                return FeatureCollection(features)
+                return FeatureCollection( features )
         
             #
-            # Light Rail query
+            # Light Rail Stop query
             #
             lightRailFilter = func.ST_DWithin( wkb_point, LightRail.geometry_column(), tolerance )
             lightRailQuery = Session.query( LightRail ).filter( lightRailFilter )
             
             for row in lightRailQuery:
                 feature = row.toFeature()
-                feature.properties["feature_type"] = "Light Rail"
-                features.append(feature)
+                feature.properties["feature_type"] = "Light Rail Stop"
+                features.append( feature )
                 
             if len( features ) > 0:
                 return FeatureCollection(features)
@@ -153,6 +154,24 @@ class MapSelectController(BaseController):
                     
                 if len( features ) > 0:
                     return FeatureCollection( features )
+                    
+        #
+        # If no points, query lines
+        #
+        
+        #
+        # Light Rail Line query
+        #
+        """lightRailLineFilter = func.ST_DWithin( wkb_point, LightRailLine.geometry_column(), tolerance )
+        lightRailLineQuery = Session.query( LightRailLine ).filter( lightRailLineFilter )
+        
+        for row in lightRailLineQuery:
+            feature = row.toFeature()
+            feature.properties["feature_type"] = "Light Rail Line"
+            features.append( feature )
+            
+        if len( features ) > 0:
+            return FeatureCollection( features )"""
     
         
         return FeatureCollection( features )

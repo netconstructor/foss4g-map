@@ -19,7 +19,10 @@ function handleMapClick( event ) {
             var feature = data.features[0];
             var imageUrl;
             switch ( feature.properties.feature_type ) {
-                case "Light Rail":
+                case "Light Rail Stop":
+                    imageUrl = "/img/light-rail.png";
+                    break;
+                case "Light Rail Line":
                     imageUrl = "/img/light-rail.png";
                     break;
                 case "Bar/Pub":
