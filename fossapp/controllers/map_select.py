@@ -59,7 +59,7 @@ class MapSelectController(BaseController):
         #
         # Query points first
         #
-        if zoom >= 13:
+        if zoom >= 9:
             #
             # These layers aren't visible until we hit zoom 13
             #
@@ -78,7 +78,7 @@ class MapSelectController(BaseController):
             if len( features ) > 0:
                 return FeatureCollection(features)
                 
-            if zoom >= 14:
+            if zoom >= 16:
                 #
                 # These layers aren't visible until we hit zoom 14
                 #
