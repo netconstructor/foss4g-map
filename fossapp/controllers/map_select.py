@@ -15,7 +15,7 @@ from fossapp.model.bar_pub import BarPub
 from fossapp.model.wynkoop import Wynkoop
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
-#from fossapp.model.light_rail_line import LightRailLine
+from fossapp.model.light_rail_line import LightRailLine
 from fossapp.model.free_bus import FreeBus
 from fossapp.model.restaurant import Restaurant
 from fossapp.model.bicycle_rental import BicycleRental
