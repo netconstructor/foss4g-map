@@ -28,7 +28,7 @@ function handleMapClick( event ) {
                 case "Light Rail Line":
                     imageUrl = "/img/light-rail.png";
                     break;
-                case "Bar/Pub":
+                case "Bar/Pub": case "Wynkoop Brewery":
                     imageUrl = "/img/bar-pub.png";
                     break;
                 case "Cafe":

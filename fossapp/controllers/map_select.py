@@ -68,7 +68,7 @@ class MapSelectController(BaseController):
         #
         if zoom >= 9:
             #
-            # Hotel query, commented out for now, doesn't exist in PostGIS/MapFish'
+            # Hotel query
             #
             hotelFilter = func.ST_DWithin( wkb_point, Hotel.geometry_column(), tolerance )
             hotelQuery = Session.query( Hotel ).filter( hotelFilter )
@@ -76,6 +76,20 @@ class MapSelectController(BaseController):
             for row in hotelQuery:
                 feature = row.toFeature()
                 feature.properties["feature_type"] = "Hotel/Conference"
+                features.append(feature)
+                
+            if len( features ) > 0:
+                return FeatureCollection( features )
+                
+            #
+            # Wynkoop query
+            #
+            wynkoopFilter = func.ST_DWithin( wkb_point, Wynkoop.geometry_column(), tolerance )
+            wynkoopQuery = Session.query( Wynkoop ).filter( wynkoopFilter )
+            
+            for row in wynkoopQuery:
+                feature = row.toFeature()
+                feature.properties["feature_type"] = "Wynkoop Brewery"
                 features.append(feature)
                 
             if len( features ) > 0:
@@ -163,7 +177,7 @@ class MapSelectController(BaseController):
         #
         # Light Rail Line query
         #
-        """lightRailLineFilter = func.ST_DWithin( wkb_point, LightRailLine.geometry_column(), tolerance )
+        lightRailLineFilter = func.ST_DWithin( wkb_point, LightRailLine.geometry_column(), tolerance )
         lightRailLineQuery = Session.query( LightRailLine ).filter( lightRailLineFilter )
         
         for row in lightRailLineQuery:
@@ -172,7 +186,7 @@ class MapSelectController(BaseController):
             features.append( feature )
             
         if len( features ) > 0:
-            return FeatureCollection( features )"""
+            return FeatureCollection( features )
             
         #
         # Free Bus query
