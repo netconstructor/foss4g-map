@@ -19,6 +19,9 @@ function handleMapClick( event ) {
             var feature = data.features[0];
             var imageUrl;
             switch ( feature.properties.feature_type ) {
+                case "Free Bus":
+                    imageUrl = "/img/free-bus.png";
+                    break;
                 case "Light Rail Stop":
                     imageUrl = "/img/light-rail.png";
                     break;
