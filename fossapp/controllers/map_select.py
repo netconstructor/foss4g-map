@@ -15,6 +15,7 @@ from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
 #from fossapp.model.light_rail_line import LightRailLine
+from fossapp.model.free_bus import FreeBus
 from fossapp.model.restaurant import Restaurant
 from fossapp.model.bicycle_rental import BicycleRental
 
@@ -172,6 +173,20 @@ class MapSelectController(BaseController):
             
         if len( features ) > 0:
             return FeatureCollection( features )"""
+            
+        #
+        # Free Bus query
+        #
+        freeBusFilter = func.ST_DWithin( wkb_point, FreeBusLine.geometry_column(), tolerance )
+        freeBusQuery = Session.query( FreeBus ).filter( freeBusFilter )
+        
+        for row in freeBusQuery:
+            feature = row.toFeature()
+            feature.properties["feature_type"] = "Free Bus"
+            features.append( feature )
+            
+        if len( features ) > 0:
+            return FeatureCollection( features )
     
         
         return FeatureCollection( features )
