@@ -29,7 +29,10 @@ function handleMapClick( event ) {
                 case "Light Rail Line":
                     imageUrl = "/img/light-rail.png";
                     break;
-                case "Bar/Pub": case "Wynkoop Brewery":
+                case "Bar/Pub":
+                    imageUrl = "/img/bar-pub.png";
+                    break;
+                case "Wynkoop Brewery":
                     imageUrl = "/img/bar-pub.png";
                     break;
                 case "Cafe":
@@ -41,8 +44,11 @@ function handleMapClick( event ) {
                 case "Bicycle Rental":
                     imageUrl = "/img/bicycle-rental.png";
                     break;
-                case "Hotel/Conference":
+                case "Sheraton Denver Downtown":
                     imageUrl = "/img/hotel.png";
+                    break;
+                case "Denver Art Museum":
+                    imageUrl = "/img/museum.png";
                     break;
             }
             bd.poiLayer.addGeoJSON( feature );
