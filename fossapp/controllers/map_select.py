@@ -177,7 +177,7 @@ class MapSelectController(BaseController):
         #
         # Free Bus query
         #
-        freeBusFilter = func.ST_DWithin( wkb_point, FreeBusLine.geometry_column(), tolerance )
+        freeBusFilter = func.ST_DWithin( wkb_point, FreeBus.geometry_column(), tolerance )
         freeBusQuery = Session.query( FreeBus ).filter( freeBusFilter )
         
         for row in freeBusQuery:
