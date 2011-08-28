@@ -13,7 +13,7 @@ from mapfish.decorators import geojsonify
 from fossapp.model.hotel import Hotel
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.wynkoop import Wynkoop
-#from fossapp.model.museum import Museum
+from fossapp.model.museum import Museum
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
 from fossapp.model.light_rail_line import LightRailLine
@@ -102,7 +102,7 @@ class MapSelectController(BaseController):
             #
             # Museum query
             #
-            """museumFilter = func.ST_DWithin( wkb_point, Museum.geometry_column(), tolerance )
+            museumFilter = func.ST_DWithin( wkb_point, Museum.geometry_column(), tolerance )
             museumQuery = Session.query( Museum ).filter( museumFilter )
             
             for row in museumQuery:
@@ -112,7 +112,7 @@ class MapSelectController(BaseController):
                 features.append(feature)
                 
             if len( features ) > 0:
-                return FeatureCollection( features )"""
+                return FeatureCollection( features )
         
             #
             # Light Rail Stop query
