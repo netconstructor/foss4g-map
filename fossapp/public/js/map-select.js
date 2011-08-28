@@ -18,7 +18,8 @@ function handleMapClick( event ) {
         if ( data && data.features && data.features.length ) {
             var feature = data.features[0];
             var imageUrl;
-            switch ( feature.properties.feature_type ) {
+            var feature_type = feature.properties.feature_type_label || feature.properties.feature_type;
+            switch ( feature_type ) {
                 case "Free Bus":
                     imageUrl = "/img/free-bus.png";
                     break;
