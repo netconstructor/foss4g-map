@@ -58,7 +58,7 @@ function handleMapClick( event ) {
             $("#current-feature-type").html( feature.properties.feature_type );
             $("#current-feature-name").html( feature.properties.name );
             $("#current-feature-image").attr( "src", imageUrl );
-            $("#current-feature-container").show();
+            $("#current-feature-container").show().css("margin", "7px").css("margin", "8px");
         }
     } );
 }
