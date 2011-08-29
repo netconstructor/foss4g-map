@@ -11,6 +11,7 @@ from mapfish.protocol import Protocol, create_default_filter
 from mapfish.decorators import geojsonify
 
 from fossapp.model.hotel import Hotel
+from fossapp.model.student_union import StudentUnion
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.wynkoop import Wynkoop
 from fossapp.model.museum import Museum
@@ -79,6 +80,21 @@ class MapSelectController(BaseController):
                 feature = row.toFeature()
                 feature.properties["feature_type"] = "FOSS4G Venue"
                 feature.properties["feature_type_label"] = "Sheraton Denver Downtown"
+                features.append(feature)
+                
+            if len( features ) > 0:
+                return FeatureCollection( features )
+                
+            #
+            # Student Union query
+            #
+            studentUnionFilter = func.ST_DWithin( wkb_point, StudentUnion.geometry_column(), tolerance )
+            studentUnionQuery = Session.query( StudentUnion ).filter( studentUnionFilter )
+            
+            for row in studentUnionQuery:
+                feature = row.toFeature()
+                feature.properties["feature_type"] = "FOSS4G Venue"
+                feature.properties["feature_type_label"] = "Tivoli Student Union"
                 features.append(feature)
                 
             if len( features ) > 0:

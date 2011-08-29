@@ -50,6 +50,9 @@ function handleMapClick( event ) {
                 case "Denver Art Museum":
                     imageUrl = "/img/museum.png";
                     break;
+                case "Tivoli Student Union":
+                    imageUrl = "/img/code-sprint.png";
+                    break;
             }
             bd.poiLayer.addGeoJSON( feature );
             $("#current-feature-type").html( feature.properties.feature_type );
