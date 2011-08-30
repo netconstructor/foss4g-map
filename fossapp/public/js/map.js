@@ -112,7 +112,7 @@ $(document).ready(function(){
                     e.layer.bindPopup( "Opening Ceremonies here yo<br /><br /><br /><br /><br /><br />" );
                     break;
             }
-            e.layer.openPopup( popupContent );
+            e.layer.openPopup();
         }
 	});
 	bd.map.addLayer(bd.poiLayer);
