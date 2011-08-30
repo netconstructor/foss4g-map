@@ -106,6 +106,13 @@ $(document).ready(function(){
             e.layer.setStyle(options);
         }
         console.log(e);
+        if ( e.properties.feature_type == "FOSS4G Venue" ) {
+            switch ( e.properties.feature_type_label ) {
+                case "Wynkoop Brewery":
+                    e.layer.bindPopup( "Opening Ceremonies here yo" ).openPopup();
+                    break;
+            }
+        }
 	});
 	bd.map.addLayer(bd.poiLayer);
 
