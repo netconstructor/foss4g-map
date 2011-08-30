@@ -1,7 +1,7 @@
 var bd = {};
 
 bd.baseMaps = [
-	{
+	/*{
 		name: "Minimal",
 		id: "cm_bd",
 		initiallyVisible: true,
@@ -14,10 +14,10 @@ bd.baseMaps = [
 				maxZoom: 19
 			}
 		}
-	},{
+	},*/{
 		name: "Road Map",
 		id: "mq_osm",
-		initiallyVisible: false,
+		initiallyVisible: true,
 		config: {
 			url: "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
 			options: {
@@ -40,19 +40,7 @@ bd.baseMaps = [
 				maxZoom: 18
 			}
 		}
-	}/*,{
-		name: "Topo",
-		id: "usgs_topo",
-		initiallyVisible: false,
-		config: {
-			url: "http://services.arcgisonline.com/ArcGIS/rest/services/USA_Topo_Maps/MapServer/tile/{z}/{y}/{x}",
-			options: {
-				attribution: 'Tiles Courtesy of <a href="http://www.esri.com/" target="_blank">Esri</a>',
-				minZoom: 10,
-				maxZoom: 15
-			}
-		}
-	}*/
+	}
 ];
 
 bd.overlayMaps = [
@@ -117,6 +105,7 @@ $(document).ready(function(){
         if (e.geometryType != "Point"){
             e.layer.setStyle(options);
         }
+        console.log(e);
 	});
 	bd.map.addLayer(bd.poiLayer);
 
