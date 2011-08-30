@@ -1,20 +1,7 @@
 var bd = {};
 
 bd.baseMaps = [
-	/*{
-		name: "Minimal",
-		id: "cm_bd",
-		initiallyVisible: true,
-		config: {
-			url: "http://{s}.tile.cloudmade.com/cadf22ef416446fd9b3b890052efa205/41027/256/{z}/{x}/{y}.png",
-			options: {
-				attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
-				subdomains: ["a", "b", "c"],
-				minZoom: 10,
-				maxZoom: 19
-			}
-		}
-	},*/{
+    {
 		name: "Road Map",
 		id: "mq_osm",
 		initiallyVisible: true,
@@ -109,16 +96,16 @@ $(document).ready(function(){
             var popupContent;
             switch ( e.properties.feature_type_label ) {
                 case "Wynkoop Brewery":
-                    popupContent = '<h2>Opening Social</h2><p>Come taste some fine Denver microbrews and test your billiards skills against a local pro, [NAME HERE]. We\'ll have the second floor to ourselves. Be there or be square!</p><p class="more-info"><a href="http://2011.foss4g.org/content/opening-social-wynkoop-brewery">More Info</a></p>';
+                    popupContent = '<h2>Opening Social</h2><p>Come taste some fine Denver microbrews and test your billiards skills against a local pro, <a href="http://www.wynkoop.com/billiards/viper-blog">Melissa "The Viper" Little</a>. We\'ll have the second floor to ourselves. Come help us kick off the conference!</p><p class="more-info"><a href="http://2011.foss4g.org/content/opening-social-wynkoop-brewery">More Info</a></p>';
                     break;
                 case "Sheraton Denver Downtown":
-                    popupContent = "You can check anytime you like, but you can't never leave.";
+                    popupContent = '<h2>The Conference</h2><p>The home of the 2011 FOSS4G Conference.</p><p class="more-info"><a href="http://www.sheratondenverdowntown.com/">More Info</a></p>';
                     break;
                 case "Denver Art Museum":
-                    popupContent = "art and stuff";
+                    popupContent = '<h2>The Big Party</h2><p>The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a greate event for networking, so don\'t miss it!</p><p class="more-info"></p>';
                     break;
                 case "Tivoli Student Union":
-                    popupContent = "Geek hack here.";
+                    popupContent = '<h2>Code Sprint</h2><p>Join us here Saturday, Sept 17 from 9:00am to 6:00pm at the Tivoli Student Union to work on some great open source geo projects. Not a coder? These projects also need people to test, document and give feedback. To sign up, head over to the <a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">Code Sprint Wiki</a>.</p><p class="more-info"><a href="http://2011.foss4g.org/content/code-sprint">More Info</a></p>';
                     break;
             }
             e.layer.bindPopup( popupContent );
