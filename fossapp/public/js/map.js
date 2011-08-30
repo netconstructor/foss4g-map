@@ -109,7 +109,7 @@ $(document).ready(function(){
             var popupContent;
             switch ( e.properties.feature_type_label ) {
                 case "Wynkoop Brewery":
-                    popupContent = '<h2>Opening Social</h2><p>Come taste some fine Denver microbrews and test your pool skills against [NAME HERE]. We\'ll have the second floor to ourselves. Be there or be square!</p>';
+                    popupContent = '<h2>Opening Social</h2><p>Come taste some fine Denver microbrews and test your billiards skills against a local pro, [NAME HERE]. We\'ll have the second floor to ourselves. Be there or be square!</p>';
                     break;
                 case "Sheraton Denver Downtown":
                     popupContent = "You can check anytime you like, but you can't never leave.";
