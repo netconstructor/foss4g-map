@@ -105,12 +105,20 @@ $(document).ready(function(){
         if (e.geometryType != "Point"){
             e.layer.setStyle(options);
         }
-        console.log(e);
         if ( e.properties.feature_type == "FOSS4G Venue" ) {
             var popupContent;
             switch ( e.properties.feature_type_label ) {
                 case "Wynkoop Brewery":
-                    popupContent = "Opening Ceremonies here yo<br /><br /><br /><br /><br /><br />";
+                    popupContent = "Beer + Pool + Geo";
+                    break;
+                case "Sheraton Denver Downtown":
+                    popupContent = "You can check anytime you like, but you can't never leave.";
+                    break;
+                case "Denver Art Museum":
+                    popupContent = "art and stuff";
+                    break;
+                case "Tivoli Student Union":
+                    popupContent = "Geek hack here.";
                     break;
             }
             e.layer.bindPopup( popupContent );
