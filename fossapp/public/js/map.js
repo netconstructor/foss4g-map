@@ -98,8 +98,8 @@ $(document).ready(function(){
 	
 	$.each( bd.venues, function( i, o ) {
 	    var foss4gIcon = L.Icon.extend( {
-	        iconUrl:  "http://foss4g.geojason.info/img/marker/foss4g-large.png" : "http://foss4g.geojason.info/img/marker/foss4g-large.png",
-	        shadowUrl:  "http://foss4g.geojason.info/img/marker/foss4g-large-shadow.png" : "http://foss4g.geojason.info/img/marker/foss4g-large-shadow.png",
+	        iconUrl: o.is_the_hotel_where_all_this_stuff_is_happening ? "http://foss4g.geojason.info/img/marker/foss4g-large.png" : "http://foss4g.geojason.info/img/marker/foss4g-large.png",
+	        shadowUrl: o.is_the_hotel_where_all_this_stuff_is_happening ? "http://foss4g.geojason.info/img/marker/foss4g-large-shadow.png" : "http://foss4g.geojason.info/img/marker/foss4g-large-shadow.png",
 	        iconSize: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 40, 24 ) : new L.Point( 34, 21 ),
 	        iconAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 21, 13 ) : new L.Point( 17, 11 ),
 	        popupAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 21, 13 ) : new L.Point( 17, 11 ),
