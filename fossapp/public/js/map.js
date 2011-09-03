@@ -106,7 +106,7 @@ $(document).ready(function(){
 	        shadowSize: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 53, 24 ) : new L.Point( 45, 21 )
 	    } );
 	    o.marker = new L.Marker( new L.LatLng( o.lat, o.lng ), {
-	        icon: foss4gIcon
+	        icon: new foss4gIcon()
 	    } );
 	    o.marker.bindPopup( o.desc );
 	    bd.map.addLayer( o.marker )
