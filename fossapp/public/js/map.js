@@ -97,17 +97,17 @@ $(document).ready(function(){
 	});
 	
 	$.each( bd.venues, function( i, o ) {
-	    var icon = L.Icon.extend( {
-	        iconUrl: o.is_the_hotel_where_all_this_stuff_is_happening ? "img/marker/foss4g-large.png" : "img/marker/foss4g-large.png",
+	    var foss4gIcon = L.Icon.extend( {
+	        iconUrl: o.is_the_hotel_where_all_this_stuff_is_happening ? "http://foss4g.geojason.info/img/marker/foss4g-large.png" : "http://foss4g.geojason.info/img/marker/foss4g-large.png",
 	        iconSize: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 40, 24 ) : new L.Point( 34, 21 ),
 	        iconAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 21, 13 ) : new L.Point( 17, 11 ),
 	        popupAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 21, 13 ) : new L.Point( 17, 11 )
 	    } );
 	    o.marker = new L.Marker( new L.LatLng( o.lat, o.lng ), {
-	        icon: icon
+	        icon: foss4gIcon
 	    } );
 	    o.marker.bindPopup( o.desc );
-	    mw.map.addLayer( o.marker )
+	    bd.map.addLayer( o.marker )
 	} );
 	
 	if (window.handleMapClick){
