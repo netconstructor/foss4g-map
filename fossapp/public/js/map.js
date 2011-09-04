@@ -74,9 +74,7 @@ $(document).ready(function(){
 	    maxZoom: 18
 	});
 	
-	if (mapLoad){
-	    fm.map.on("load", mapLoad);
-	}
+	fm.map.on("load", mapLoad);
 
 	fm.map.setView(new L.LatLng(39.74402223643582, -104.99264717102051), 14);
 	
@@ -88,6 +86,7 @@ $(document).ready(function(){
 		if (o.initiallyVisible) fm.map.addLayer(o.layer);
 		baseMaps[o.name] = o.layer;
 	});
+	
 	$.each(fm.overlayMaps, function(i, o){
 		o.layer = createTiledMapLayer(o.config);
 		if (o.initiallyVisible){
@@ -109,12 +108,11 @@ $(document).ready(function(){
 	        icon: new foss4gIcon()
 	    } );
 	    o.marker.bindPopup( o.desc );
+	    o.marker.on( "click", clearSelection);
 	    fm.map.addLayer( o.marker )
 	} );
 	
-	if (window.handleMapClick){
-	    fm.map.on("click", handleMapClick);
-	}
+	fm.map.on("click", handleMapClick);
 	
 	fm.layersControl = new L.Control.Layers(baseMaps, overlayMaps);
 	fm.map.addControl(fm.layersControl);
@@ -129,7 +127,7 @@ $(document).ready(function(){
         if (e.geometryType != "Point"){
             e.layer.setStyle(options);
         }
-        if ( e.properties.feature_type == "FOSS4G Venue" ) {
+        /*if ( e.properties.feature_type == "FOSS4G Venue" ) {
             var popupContent;
             switch ( e.properties.feature_type_label ) {
                 case "Wynkoop Brewery":
@@ -139,7 +137,7 @@ $(document).ready(function(){
                     popupContent = '<h2>The Conference</h2><p>The home of the 2011 FOSS4G Conference.</p><p class="more-info"><a href="http://www.sheratondenverdowntown.com/">More Info</a></p>';
                     break;
                 case "Denver Art Museum":
-                    popupContent = '<h2>The Big Party</h2><p>The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"></p>';
+                    popupContent = '<h2>The Big Party</h2><p>The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"><a href="http://2011.foss4g.org/content/big-party-denver-art-museum">More Info</a></p>';
                     break;
                 case "Tivoli Student Union":
                     popupContent = '<h2>Code Sprint</h2><p>Join us here Saturday, Sept 17 from 9:00am to 6:00pm at the Tivoli Student Union to work on some great open source geo projects. Not a coder? These projects also need people to test, document and give feedback. To sign up, head over to the <a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">Code Sprint Wiki</a>.</p><p class="more-info"><a href="http://2011.foss4g.org/content/code-sprint">More Info</a></p>';
@@ -149,7 +147,7 @@ $(document).ready(function(){
             setTimeout( function() {
                 e.layer.openPopup();
             }, 300);
-        }
+        }*/
 	});
 	fm.map.addLayer(fm.poiLayer);
 
@@ -158,4 +156,73 @@ $(document).ready(function(){
 function createTiledMapLayer(o){
 	if (!o.options.subdomains) o.options.subdomains = [];
 	return new L.TileLayer(o.url, o.options);
+}
+
+function mapLoad(){
+    
+    $( ".leaflet-bottom.leaflet-left" ).html( '<div id="current-feature-container"><div class="left-side"><img id="current-feature-image" src="" /></div><div class="right-side"><div id="current-feature-type" class="content"></div><div id="current-feature-name" class="content"></div></div></div>' );
+    
+    $("#current-feature-container" ).click( function( event ) {
+    	event.stopPropagation();
+    } ).mousedown( function( event ) {
+        event.stopPropagation();
+    } );
+    
+}
+
+function handleMapClick( event ) {
+    clearSelection();
+    $.getJSON( "select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + fm.map.getZoom(), function(data){
+        if ( data && data.features && data.features.length ) {
+            var feature = data.features[0];
+            var imageUrl;
+            //var feature_type = feature.properties.feature_type_label || feature.properties.feature_type;
+            switch ( feature_type ) {
+                case "Free Bus":
+                    imageUrl = "/img/free-bus.png";
+                    break;
+                case "Light Rail Stop":
+                    imageUrl = "/img/light-rail.png";
+                    break;
+                case "Light Rail Line":
+                    imageUrl = "/img/light-rail.png";
+                    break;
+                case "Bar/Pub":
+                    imageUrl = "/img/bar-pub.png";
+                    break;
+                case "Cafe":
+                    imageUrl = "/img/cafe.png";
+                    break;
+                case "Restaurant":
+                    imageUrl = "/img/restaurant.png";
+                    break;
+                case "Bicycle Rental":
+                    imageUrl = "/img/bicycle-rental.png";
+                    break;
+                /*case "Wynkoop Brewery":
+                    imageUrl = "/img/bar-pub.png";
+                    break;
+                case "Sheraton Denver Downtown":
+                    imageUrl = "/img/hotel.png";
+                    break;
+                case "Denver Art Museum":
+                    imageUrl = "/img/museum.png";
+                    break;
+                case "Tivoli Student Union":
+                    imageUrl = "/img/code-sprint.png";
+                    break;*/
+            }
+            fm.poiLayer.addGeoJSON( feature );
+            $("#current-feature-type").html( feature.properties.feature_type );
+            $("#current-feature-name").html( feature.properties.name );
+            $("#current-feature-image").attr( "src", imageUrl );
+            $("#current-feature-container").show();
+        }
+    } );
+}
+
+function clearSelection() {
+    $( "#current-feature-container" ).hide();
+    $( "#current-feature-container div.content" ).html( "" );
+    fm.poiLayer.clearLayers();
 }
