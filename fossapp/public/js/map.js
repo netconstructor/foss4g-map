@@ -57,7 +57,7 @@ fm.venues = [
         "lng": -104.9893319606781,
         "is_the_hotel_where_all_this_stuff_is_happening": true
     },{
-        "desc": '<h2>The Big Party</h2><h3>Denver Art Museum</h3><p>The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"></p>',
+        "desc": '<h2>The Big Party</h2><h3>Denver Art Museum</h3><p>The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"><a href="http://2011.foss4g.org/content/big-party-denver-art-museum">More Info</a></p>',
         "lat": 39.737496577957,
         "lng": -104.9897128343582
     },{
@@ -127,27 +127,6 @@ $(document).ready(function(){
         if (e.geometryType != "Point"){
             e.layer.setStyle(options);
         }
-        /*if ( e.properties.feature_type == "FOSS4G Venue" ) {
-            var popupContent;
-            switch ( e.properties.feature_type_label ) {
-                case "Wynkoop Brewery":
-                    popupContent = '<h2>Opening Social</h2><p>Come taste some fine Denver microbrews and test your billiards skills against a local pro, <a href="http://www.wynkoop.com/billiards/viper-blog">Melissa "The Viper" Little</a>. We\'ll have the second floor to ourselves. Come help us kick off the conference!</p><p class="more-info"><a href="http://2011.foss4g.org/content/opening-social-wynkoop-brewery">More Info</a></p>';
-                    break;
-                case "Sheraton Denver Downtown":
-                    popupContent = '<h2>The Conference</h2><p>The home of the 2011 FOSS4G Conference.</p><p class="more-info"><a href="http://www.sheratondenverdowntown.com/">More Info</a></p>';
-                    break;
-                case "Denver Art Museum":
-                    popupContent = '<h2>The Big Party</h2><p>The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"><a href="http://2011.foss4g.org/content/big-party-denver-art-museum">More Info</a></p>';
-                    break;
-                case "Tivoli Student Union":
-                    popupContent = '<h2>Code Sprint</h2><p>Join us here Saturday, Sept 17 from 9:00am to 6:00pm at the Tivoli Student Union to work on some great open source geo projects. Not a coder? These projects also need people to test, document and give feedback. To sign up, head over to the <a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">Code Sprint Wiki</a>.</p><p class="more-info"><a href="http://2011.foss4g.org/content/code-sprint">More Info</a></p>';
-                    break;
-            }
-            e.layer.bindPopup( popupContent );
-            setTimeout( function() {
-                e.layer.openPopup();
-            }, 300);
-        }*/
 	});
 	fm.map.addLayer(fm.poiLayer);
 
@@ -176,7 +155,6 @@ function handleMapClick( event ) {
         if ( data && data.features && data.features.length ) {
             var feature = data.features[0];
             var imageUrl;
-            //var feature_type = feature.properties.feature_type_label || feature.properties.feature_type;
             switch ( feature.properties.feature_type ) {
                 case "Free Bus":
                     imageUrl = "/img/free-bus.png";
@@ -199,18 +177,6 @@ function handleMapClick( event ) {
                 case "Bicycle Rental":
                     imageUrl = "/img/bicycle-rental.png";
                     break;
-                /*case "Wynkoop Brewery":
-                    imageUrl = "/img/bar-pub.png";
-                    break;
-                case "Sheraton Denver Downtown":
-                    imageUrl = "/img/hotel.png";
-                    break;
-                case "Denver Art Museum":
-                    imageUrl = "/img/museum.png";
-                    break;
-                case "Tivoli Student Union":
-                    imageUrl = "/img/code-sprint.png";
-                    break;*/
             }
             fm.poiLayer.addGeoJSON( feature );
             $("#current-feature-type").html( feature.properties.feature_type );
