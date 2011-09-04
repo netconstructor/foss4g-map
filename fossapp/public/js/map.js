@@ -1,4 +1,4 @@
-var bd = {};
+var fm = {};
 
 fm.baseMaps = [
     {
