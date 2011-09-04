@@ -8,7 +8,7 @@ from pylons.controllers.util import abort, redirect
 from fossapp.lib.base import BaseController, render
 
 from mapfish.protocol import Protocol, create_default_filter
-from mapfish.decorators import geojsonify
+from mapfish.decorators import MapFishEncoder, _jsonify
 
 from fossapp.model.bar_pub import BarPub
 from fossapp.model.cafe import Cafe
@@ -31,7 +31,8 @@ from geojson import Feature, FeatureCollection, loads, GeoJSON
 log = logging.getLogger(__name__)
 
 class MapSelectController(BaseController):
-    readonly = True # if set to True, only GET is supported
+
+    geojsonify = _jsonify( cb="callback", cls=MapFishEncoder )
 
     @geojsonify
     def index(self):
