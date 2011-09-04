@@ -13,8 +13,8 @@ function mapLoad(){
 function handleMapClick( event ) {
     $( "#current-feature-container" ).hide();
     $( "#current-feature-container div.content" ).html( "" );
-    bd.poiLayer.clearLayers();
-    $.getJSON( "select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + bd.map.getZoom(), function(data){
+    fm.poiLayer.clearLayers();
+    $.getJSON( "select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + fm.map.getZoom(), function(data){
         if ( data && data.features && data.features.length ) {
             var feature = data.features[0];
             var imageUrl;
@@ -54,7 +54,7 @@ function handleMapClick( event ) {
                     imageUrl = "/img/code-sprint.png";
                     break;
             }
-            bd.poiLayer.addGeoJSON( feature );
+            fm.poiLayer.addGeoJSON( feature );
             $("#current-feature-type").html( feature.properties.feature_type );
             $("#current-feature-name").html( feature.properties.name );
             $("#current-feature-image").attr( "src", imageUrl );

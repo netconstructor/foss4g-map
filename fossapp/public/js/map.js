@@ -1,6 +1,6 @@
 var bd = {};
 
-bd.baseMaps = [
+fm.baseMaps = [
     {
 		name: "Road Map",
 		id: "mq_osm",
@@ -30,7 +30,7 @@ bd.baseMaps = [
 	}
 ];
 
-bd.overlayMaps = [
+fm.overlayMaps = [
 	{
 		name: "Local Amenities",
 		id: "foss4g",
@@ -46,7 +46,7 @@ bd.overlayMaps = [
 	}
 ];
 
-bd.venues = [
+fm.venues = [
     {
         "desc": '<h2>Opening Social</h2><h3>Wynkoop Brewery</h3><p>Come taste some fine Denver microbrews and test your billiards skills against a local pro, <a href="http://www.wynkoop.com/billiards/viper-blog">Melissa "The Viper" Little</a>. We\'ll have the second floor to ourselves. Come help us kick off the conference!</p><p class="more-info"><a href="http://2011.foss4g.org/content/opening-social-wynkoop-brewery">More Info</a></p>',
         "lat": 39.75356211538687,
@@ -69,58 +69,58 @@ bd.venues = [
 
 $(document).ready(function(){
 
-	bd.map = new L.Map("map-container", {
+	fm.map = new L.Map("map-container", {
 	    minZoom: 10,
 	    maxZoom: 18
 	});
 	
 	if (mapLoad){
-	    bd.map.on("load", mapLoad);
+	    fm.map.on("load", mapLoad);
 	}
 
-	bd.map.setView(new L.LatLng(39.74976, -104.99075), 14);
+	fm.map.setView(new L.LatLng(39.74402223643582, -104.99264717102051), 14);
 	
 	var baseMaps = {};
 	var overlayMaps = {};
 
-	$.each(bd.baseMaps, function(i, o){
+	$.each(fm.baseMaps, function(i, o){
 		o.layer = createTiledMapLayer(o.config);
-		if (o.initiallyVisible) bd.map.addLayer(o.layer);
+		if (o.initiallyVisible) fm.map.addLayer(o.layer);
 		baseMaps[o.name] = o.layer;
 	});
-	$.each(bd.overlayMaps, function(i, o){
+	$.each(fm.overlayMaps, function(i, o){
 		o.layer = createTiledMapLayer(o.config);
 		if (o.initiallyVisible){
-			bd.map.addLayer(o.layer);
+			fm.map.addLayer(o.layer);
 		}
 		overlayMaps[o.name] = o.layer;
 	});
 	
-	$.each( bd.venues, function( i, o ) {
+	$.each( fm.venues, function( i, o ) {
 	    var foss4gIcon = L.Icon.extend( {
 	        iconUrl: o.is_the_hotel_where_all_this_stuff_is_happening ? "http://foss4g.geojason.info/img/marker/foss4g-large.png" : "http://foss4g.geojason.info/img/marker/foss4g-large.png",
 	        shadowUrl: o.is_the_hotel_where_all_this_stuff_is_happening ? "http://foss4g.geojason.info/img/marker/foss4g-large-shadow.png" : "http://foss4g.geojason.info/img/marker/foss4g-large-shadow.png",
 	        iconSize: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 40, 24 ) : new L.Point( 34, 21 ),
 	        iconAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 21, 13 ) : new L.Point( 17, 11 ),
-	        popupAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 21, 13 ) : new L.Point( 17, 11 ),
+	        popupAnchor: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 0, -12 ) : new L.Point( 0, -10 ),
 	        shadowSize: o.is_the_hotel_where_all_this_stuff_is_happening ? new L.Point( 53, 24 ) : new L.Point( 45, 21 )
 	    } );
 	    o.marker = new L.Marker( new L.LatLng( o.lat, o.lng ), {
 	        icon: new foss4gIcon()
 	    } );
 	    o.marker.bindPopup( o.desc );
-	    bd.map.addLayer( o.marker )
+	    fm.map.addLayer( o.marker )
 	} );
 	
 	if (window.handleMapClick){
-	    bd.map.on("click", handleMapClick);
+	    fm.map.on("click", handleMapClick);
 	}
 	
-	bd.layersControl = new L.Control.Layers(baseMaps, overlayMaps);
-	bd.map.addControl(bd.layersControl);
+	fm.layersControl = new L.Control.Layers(baseMaps, overlayMaps);
+	fm.map.addControl(fm.layersControl);
 	
-	bd.poiLayer = new L.GeoJSON();
-	bd.poiLayer.on("featureparse", function(e){
+	fm.poiLayer = new L.GeoJSON();
+	fm.poiLayer.on("featureparse", function(e){
 		var options = {
 			color: "#f00",
 			weight: 5,
@@ -151,7 +151,7 @@ $(document).ready(function(){
             }, 300);
         }
 	});
-	bd.map.addLayer(bd.poiLayer);
+	fm.map.addLayer(fm.poiLayer);
 
 });
 
