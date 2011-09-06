@@ -37,7 +37,7 @@ fm.overlayMaps = [
 		initiallyVisible: true,
 		layerType: "tiled",
 		config: {
-			url: "/tiles/foss4g/{z}/{x}/{y}.png",
+			url: "http://foss4g.geojason.info/tiles/foss4g/{z}/{x}/{y}.png",
 			options: {
 				minZoom: 10,
 				maxZoom: 18
@@ -66,6 +66,10 @@ fm.venues = [
         "lng": -105.00589728355408
     }
 ];
+
+$(window).resize(function(){
+    fm.map.invalidateSize();
+});
 
 $(document).ready(function(){
 
@@ -157,25 +161,25 @@ function handleMapClick( event ) {
             var imageUrl;
             switch ( feature.properties.feature_type ) {
                 case "Free Bus":
-                    imageUrl = "/img/free-bus.png";
+                    imageUrl = "http://foss4g.geojason.info/img/free-bus.png";
                     break;
                 case "Light Rail Stop":
-                    imageUrl = "/img/light-rail.png";
+                    imageUrl = "http://foss4g.geojason.info/img/light-rail.png";
                     break;
                 case "Light Rail Line":
-                    imageUrl = "/img/light-rail.png";
+                    imageUrl = "http://foss4g.geojason.info/img/light-rail.png";
                     break;
                 case "Bar/Pub":
-                    imageUrl = "/img/bar-pub.png";
+                    imageUrl = "http://foss4g.geojason.info/img/bar-pub.png";
                     break;
                 case "Cafe":
-                    imageUrl = "/img/cafe.png";
+                    imageUrl = "http://foss4g.geojason.info/img/cafe.png";
                     break;
                 case "Restaurant":
-                    imageUrl = "/img/restaurant.png";
+                    imageUrl = "http://foss4g.geojason.info/img/restaurant.png";
                     break;
                 case "Bicycle Rental":
-                    imageUrl = "/img/bicycle-rental.png";
+                    imageUrl = "http://foss4g.geojason.info/img/bicycle-rental.png";
                     break;
             }
             fm.poiLayer.addGeoJSON( feature );
