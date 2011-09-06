@@ -48,20 +48,20 @@ fm.overlayMaps = [
 
 fm.venues = [
     {
-        "desc": '<h2>Opening Social</h2><h3>Wynkoop Brewery</h3><p><img src="http://foss4g.geojason.info/img/venue-wynkoop.jpg" alt="Wynkoop Brewery" />Come taste some fine Denver microbrews and test your billiards skills against a local pro, <a href="http://www.wynkoop.com/billiards/viper-blog">Melissa "The Viper" Little</a>. We\'ll have the second floor to ourselves. Come help us kick off the conference!</p><p class="more-info"><a href="http://2011.foss4g.org/content/opening-social-wynkoop-brewery">More Info</a></p>',
+        "desc": '<h2>Opening Social</h2><h3>Wynkoop Brewery</h3><p><img class="wrap-this" src="http://foss4g.geojason.info/img/venue-wynkoop.jpg" alt="Wynkoop Brewery" />Come taste some fine Denver microbrews and test your billiards skills against a local pro, <a href="http://www.wynkoop.com/billiards/viper-blog">Melissa "The Viper" Little</a>. We\'ll have the second floor to ourselves. Come help us kick off the conference!</p><p class="more-info"><a href="http://2011.foss4g.org/content/opening-social-wynkoop-brewery">More Info</a></p>',
         "lat": 39.75356211538687,
         "lng": -104.99846756458282
     },{
-        "desc": '<h2>The Conference</h2><h3>Sheraton Denver Downtown</h3><p><img src="http://foss4g.geojason.info/img/venue-sheraton.jpg" alt="Sheraton Denver Downtown" />The home of the 2011 FOSS4G Conference.</p><p class="more-info"><a href="http://www.sheratondenverdowntown.com/">More Info</a></p>',
+        "desc": '<h2>The Conference</h2><h3>Sheraton Denver Downtown</h3><p><img class="wrap-this" src="http://foss4g.geojason.info/img/venue-sheraton.jpg" alt="Sheraton Denver Downtown" />The home of the 2011 FOSS4G Conference.</p><p class="more-info"><a href="http://www.sheratondenverdowntown.com/">More Info</a></p>',
         "lat": 39.74269405515172,
         "lng": -104.9893319606781,
         "is_the_hotel_where_all_this_stuff_is_happening": true
     },{
-        "desc": '<h2>The Big Party</h2><h3>Denver Art Museum</h3><p><img src="http://foss4g.geojason.info/img/venue-museum.jpg" alt="Denver Art Museum" />The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"><a href="http://2011.foss4g.org/content/big-party-denver-art-museum">More Info</a></p>',
+        "desc": '<h2>The Big Party</h2><h3>Denver Art Museum</h3><p><img class="wrap-this" src="http://foss4g.geojason.info/img/venue-museum.jpg" alt="Denver Art Museum" />The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"><a href="http://2011.foss4g.org/content/big-party-denver-art-museum">More Info</a></p>',
         "lat": 39.737496577957,
         "lng": -104.9897128343582
     },{
-        "desc": '<h2>Code Sprint</h2><h3>Tivoli Student Union</h3><p><img src="http://foss4g.geojason.info/img/venue-student-union.jpg" alt="Tivoli Student Union" />Join us here Saturday, Sept 17 from 9:00am to 6:00pm at the Tivoli Student Union to work on some great open source geo projects. Not a coder? These projects also need people to test, document and give feedback. To sign up, head over to the <a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">Code Sprint Wiki</a>.</p><p class="more-info"><a href="http://2011.foss4g.org/content/code-sprint">More Info</a></p>',
+        "desc": '<h2>Code Sprint</h2><h3>Tivoli Student Union</h3><p><img class="wrap-this" src="http://foss4g.geojason.info/img/venue-student-union.jpg" alt="Tivoli Student Union" />Join us here Saturday, Sept 17 from 9:00am to 6:00pm at the Tivoli Student Union to work on some great open source geo projects. Not a coder? These projects also need people to test, document and give feedback. To sign up, head over to the <a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">Code Sprint Wiki</a>.</p><p class="more-info"><a href="http://2011.foss4g.org/content/code-sprint">More Info</a></p>',
         "lat": 39.745181280550725,
         "lng": -105.00589728355408
     }
@@ -127,27 +127,6 @@ $(document).ready(function(){
         if (e.geometryType != "Point"){
             e.layer.setStyle(options);
         }
-        /*if ( e.properties.feature_type == "FOSS4G Venue" ) {
-            var popupContent;
-            switch ( e.properties.feature_type_label ) {
-                case "Wynkoop Brewery":
-                    popupContent = '<h2>Opening Social</h2><p><img src="http://foss4g.geojason.info/img/venue-wynkoop.jpg" alt="Wynkoop Brewery" />Come taste some fine Denver microbrews and test your billiards skills against a local pro, <a href="http://www.wynkoop.com/billiards/viper-blog">Melissa "The Viper" Little</a>. We\'ll have the second floor to ourselves. Come help us kick off the conference!</p><p class="more-info"><a href="http://2011.foss4g.org/content/welcome-reception-tuesday">More Info</a></p>';
-                    break;
-                case "Sheraton Denver Downtown":
-                    popupContent = '<h2>The Conference</h2><p><img src="http://foss4g.geojason.info/img/venue-sheraton.jpg" alt="Sheraton Denver Downtown" />The home of the 2011 FOSS4G Conference.</p><p class="more-info"><a href="http://www.sheratondenverdowntown.com/">More Info</a></p>';
-                    break;
-                case "Denver Art Museum":
-                    popupContent = '<h2>The Big Party</h2><p><img src="http://foss4g.geojason.info/img/venue-museum.jpg" alt="Denver Art Museum" />The <a href="http://www.denverartmuseum.org/home">Denver Art Museum</a> will be the place to be on Thursday, September 15 for the Big Party. Come explore the <a href="http://expansion.denverartmuseum.org/">Hamilton Building</a> where we\'ll have access to several galleries as well as the gift shop. This is a great event for networking, so don\'t miss it!</p><p class="more-info"></p>';
-                    break;
-                case "Tivoli Student Union":
-                    popupContent = '<h2>Code Sprint</h2><p><img src="http://foss4g.geojason.info/img/venue-student-union.jpg" alt="Tivoli Student Union" />Join us here Saturday, Sept 17 from 9:00am to 6:00pm at the Tivoli Student Union to work on some great open source geo projects. Not a coder? These projects also need people to test, document and give feedback. To sign up, head over to the <a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">Code Sprint Wiki</a>.</p><p class="more-info"><a href="http://wiki.osgeo.org/wiki/FOSS4G_2011_Code_Sprint">More Info</a></p>';
-                    break;
-            }
-            e.layer.bindPopup( popupContent );
-            setTimeout( function() {
-                e.layer.openPopup();
-            }, 300);
-        }*/
 	});
 	fm.map.addLayer(fm.poiLayer);
 
