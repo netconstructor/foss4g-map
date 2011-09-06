@@ -8,7 +8,7 @@ fm.baseMaps = [
 		config: {
 			url: "http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png",
 			options: {
-				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Map data (c) <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors, CC-BY-SA.',
+				attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.',
 				subdomains: ["otile1", "otile2", "otile3", "otile4"],
 				minZoom: 4,
 				maxZoom: 18
