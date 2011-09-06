@@ -47,3 +47,31 @@
 	margin-top: 2px;
 	font-size: 0.8em;
 }
+.leaflet-popup-content{
+    
+}
+.leaflet-popup-content h1, .leaflet-popup-content h2, .leaflet-popup-content h3, .leaflet-popup-content h4, .leaflet-popup-content h5{
+    text-align: center;
+}
+.leaflet-popup-content h2{
+    font-size: 2em;
+    color: #444;
+    margin: 4px;
+}
+.leaflet-popup-content h3{
+    font-size: 1.5em;
+    color: #444;
+    margin: 4px;
+}
+.leaflet-popup-content p{
+    color: #333;
+    font-size: 1.1em;
+    margin: 9px 0 !important;
+}
+.leaflet-popup-content p.more-info{
+    text-align: right;
+}
+.leaflet-popup-content img.wrap-this{
+    float: right;
+    padding: 0px 0px 4px 4px;
+}
