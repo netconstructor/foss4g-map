@@ -8,13 +8,9 @@ from pylons.controllers.util import abort, redirect
 from fossapp.lib.base import BaseController, render
 
 from mapfish.protocol import Protocol, create_default_filter
-from mapfish.decorators import geojsonify
+from mapfish.decorators import MapFishEncoder, _jsonify
 
-from fossapp.model.hotel import Hotel
-from fossapp.model.student_union import StudentUnion
 from fossapp.model.bar_pub import BarPub
-from fossapp.model.wynkoop import Wynkoop
-from fossapp.model.museum import Museum
 from fossapp.model.cafe import Cafe
 from fossapp.model.light_rail import LightRail
 from fossapp.model.light_rail_line import LightRailLine
@@ -35,7 +31,8 @@ from geojson import Feature, FeatureCollection, loads, GeoJSON
 log = logging.getLogger(__name__)
 
 class MapSelectController(BaseController):
-    readonly = True # if set to True, only GET is supported
+
+    geojsonify = _jsonify( cb="callback", cls=MapFishEncoder )
 
     @geojsonify
     def index(self):
@@ -69,67 +66,7 @@ class MapSelectController(BaseController):
         #
         # These layers aren't visible until we hit zoom 9
         #
-        if zoom >= 9:
-            #
-            # Hotel query
-            #
-            hotelFilter = func.ST_DWithin( wkb_point, Hotel.geometry_column(), tolerance )
-            hotelQuery = Session.query( Hotel ).filter( hotelFilter )
-            
-            for row in hotelQuery:
-                feature = row.toFeature()
-                feature.properties["feature_type"] = "FOSS4G Venue"
-                feature.properties["feature_type_label"] = "Sheraton Denver Downtown"
-                features.append(feature)
-                
-            if len( features ) > 0:
-                return FeatureCollection( features )
-                
-            #
-            # Student Union query
-            #
-            studentUnionFilter = func.ST_DWithin( wkb_point, StudentUnion.geometry_column(), tolerance )
-            studentUnionQuery = Session.query( StudentUnion ).filter( studentUnionFilter )
-            
-            for row in studentUnionQuery:
-                feature = row.toFeature()
-                feature.properties["feature_type"] = "FOSS4G Venue"
-                feature.properties["feature_type_label"] = "Tivoli Student Union"
-                features.append(feature)
-                
-            if len( features ) > 0:
-                return FeatureCollection( features )
-                
-            #
-            # Wynkoop query
-            #
-            wynkoopFilter = func.ST_DWithin( wkb_point, Wynkoop.geometry_column(), tolerance )
-            wynkoopQuery = Session.query( Wynkoop ).filter( wynkoopFilter )
-            
-            for row in wynkoopQuery:
-                feature = row.toFeature()
-                feature.properties["feature_type"] = "FOSS4G Venue"
-                feature.properties["feature_type_label"] = "Wynkoop Brewery"
-                features.append(feature)
-                
-            if len( features ) > 0:
-                return FeatureCollection( features )
-                
-            #
-            # Museum query
-            #
-            museumFilter = func.ST_DWithin( wkb_point, Museum.geometry_column(), tolerance )
-            museumQuery = Session.query( Museum ).filter( museumFilter )
-            
-            for row in museumQuery:
-                feature = row.toFeature()
-                feature.properties["feature_type"] = "FOSS4G Venue"
-                feature.properties["feature_type_label"] = "Denver Art Museum"
-                features.append(feature)
-                
-            if len( features ) > 0:
-                return FeatureCollection( features )
-        
+        if zoom >= 9:        
             #
             # Light Rail Stop query
             #
