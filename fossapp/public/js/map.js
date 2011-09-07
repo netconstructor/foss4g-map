@@ -67,34 +67,36 @@ fm.venues = [
     }
 ];
 
-$(window).resize(function(){
+$( window ).resize( function() {
     fm.map.invalidateSize();
-});
+} );
 
-$(document).ready(function(){
+$( document ).ready( function() {
 
-	fm.map = new L.Map("map-container", {
+	fm.map = new L.Map( "map-container", {
 	    minZoom: 10,
 	    maxZoom: 18
-	});
+	} );
 	
-	fm.map.on("load", mapLoad);
+	fm.map.on( "load", mapLoad );
 
-	fm.map.setView(new L.LatLng(39.74402223643582, -104.99264717102051), 14);
+	fm.map.setView( new L.LatLng( 39.74402223643582, -104.99264717102051 ), 14 );
 	
 	var baseMaps = {};
 	var overlayMaps = {};
 
-	$.each(fm.baseMaps, function(i, o){
-		o.layer = createTiledMapLayer(o.config);
-		if (o.initiallyVisible) fm.map.addLayer(o.layer);
+	$.each( fm.baseMaps, function( i, o ) {
+		o.layer = createTiledMapLayer( o.config );
+		if ( o.initiallyVisible ) {
+		    fm.map.addLayer( o.layer );
+		}
 		baseMaps[o.name] = o.layer;
 	});
 	
-	$.each(fm.overlayMaps, function(i, o){
-		o.layer = createTiledMapLayer(o.config);
-		if (o.initiallyVisible){
-			fm.map.addLayer(o.layer);
+	$.each( fm.overlayMaps, function( i, o ) {
+		o.layer = createTiledMapLayer( o.config );
+		if ( o.initiallyVisible ) {
+			fm.map.addLayer( o.layer );
 		}
 		overlayMaps[o.name] = o.layer;
 	});
@@ -116,36 +118,38 @@ $(document).ready(function(){
 	    fm.map.addLayer( o.marker )
 	} );
 	
-	fm.map.on("click", handleMapClick);
+	fm.map.on( "click", handleMapClick );
 	
-	fm.layersControl = new L.Control.Layers(baseMaps, overlayMaps);
-	fm.map.addControl(fm.layersControl);
+	fm.layersControl = new L.Control.Layers( baseMaps, overlayMaps );
+	fm.map.addControl( fm.layersControl );
 	
 	fm.poiLayer = new L.GeoJSON();
-	fm.poiLayer.on("featureparse", function(e){
+	fm.poiLayer.on( "featureparse", function( e ) {
 		var options = {
 			color: "#f00",
 			weight: 5,
 			opacity: 0.6
 		};
-        if (e.geometryType != "Point"){
+        if ( e.geometryType != "Point" ) {
             e.layer.setStyle(options);
         }
-	});
-	fm.map.addLayer(fm.poiLayer);
+	} );
+	fm.map.addLayer( fm.poiLayer );
 
-});
+} );
 
-function createTiledMapLayer(o){
-	if (!o.options.subdomains) o.options.subdomains = [];
-	return new L.TileLayer(o.url, o.options);
+function createTiledMapLayer( o ) {
+	if ( !o.options.subdomains ) {
+	    o.options.subdomains = [];
+	}
+	return new L.TileLayer( o.url, o.options );
 }
 
 function mapLoad(){
     
     $( ".leaflet-bottom.leaflet-left" ).html( '<div id="current-feature-container"><div class="left-side"><img id="current-feature-image" src="" /></div><div class="right-side"><div id="current-feature-type" class="content"></div><div id="current-feature-name" class="content"></div></div></div>' );
     
-    $("#current-feature-container" ).click( function( event ) {
+    $( "#current-feature-container" ).click( function( event ) {
     	event.stopPropagation();
     } ).mousedown( function( event ) {
         event.stopPropagation();
@@ -155,7 +159,7 @@ function mapLoad(){
 
 function handleMapClick( event ) {
     clearSelection();
-    $.getJSON( "http://foss4g.geojason.info/select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + fm.map.getZoom() + "&callback=?", function(data){
+    $.getJSON( "http://foss4g.geojason.info/select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + fm.map.getZoom() + "&callback=?", function( data ) {
         if ( data && data.features && data.features.length ) {
             var feature = data.features[0];
             var imageUrl;

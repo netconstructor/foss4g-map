@@ -29,6 +29,7 @@
 }
 #current-feature-container div.left-side img{
     margin-top: 3px;
+    height: 35px;
 }
 #current-feature-container div.right-side{
     width: 150px;
