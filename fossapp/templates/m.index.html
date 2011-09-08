@@ -2,25 +2,63 @@
 
 <%block name="title">FOSS4G Map</%block>
 
-<%block name="css"></%block>
+<%block name="css">
+<link rel="stylesheet" href="/lib/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="/css/map.css" />
+<style type="text/css">
+/* Override the 500px height for the default map */
+#map-container{
+    height: 100% !important;
+}
+</style>
+</%block>
 
-<%block name="scripts"></%block>
+<%block name="scripts">
+<script src="/lib/leaflet/dist/leaflet.js" type="text/javascript"></script>
+<script src="/js/map.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(document).ready(
+    $(window).bind("orientationchange resize pageshow", adjustWindow);
+);
+
+function adjustWindow(){
+
+	scroll(0, 0);
+
+	/* Calculate the geometry that our content area should take */
+	var header = $(".ui-header:visible");
+	var footer = $(".ui-footer:visible");
+	var content = $(".ui-content:visible");
+	var viewport_height = $(window).height();
+
+	var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
+
+	/* Trim margin/border/padding height */
+	content_height -= (content.outerHeight() - content.height());
+	content.height(content_height);
+
+	if (fm.map){
+		var center = fm.map.getCenter();
+		fm.map.invalidateSize();
+		fm.map.panTo(center);
+	}
+
+}
+</script>
+</%block>
 
 <div data-role="page">
 
 	<div data-role="header">
-		<h1>2011 FOSS4G</h1>
+		<h1>2011 FOSS4G Map</h1>
 	</div>
 
 	<div data-role="content">	
-		<ul data-role="listview" data-inset="true">
-			<li><a href="/map">Map</a></li>
-			<li><a href="/nearest">Find the nearest ...</a></li>
-			<li><a href="/schedule">Schedule</a></li>
-		</ul>		
+		<div id="map-container"></div>		
 	</div>
 
 	<div data-role="footer">
-		<h4>foo</h4>
+		<h4>awesome Toolbar heeere</h4>
 	</div>
 </div>
