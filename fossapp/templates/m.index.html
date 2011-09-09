@@ -49,11 +49,6 @@ html, body{
     
     fm.currentLocation = {};
     
-    fm.tracking = {
-    	currentlyTracking: false,
-    	interval: null
-    };
-    
     function mobileMapLoad () {
         $( ".leaflet-bottom.leaflet-right" ).append( '<div id="locate-container"><a href="javascript:void(0);" id="locate"><img src="img/locate.png" id="img-locate" /></a></div>' );
         
@@ -61,23 +56,6 @@ html, body{
         fm.map.on("locationerror", locationError);
         
         $("#locate").click(function(event){
-    		/*if (!fm.tracking.currentlyTracking){
-    			fm.tracking.currentlyTracking = true;
-    			fm.map.locate({
-    				enableHighAccuracy: true,
-    				maximumAge: 0
-    			});
-    			fm.tracking.interval = setInterval(function(){
-    				fm.map.locate({
-    					enableHighAccuracy: true,
-    					maximumAge: 0
-    				});
-    			}, 10000);
-    		}else{
-    			if (fm.currentLocation.circleLocation) fm.map.removeLayer(fm.currentLocation.circleLocation);
-    			if (fm.currentLocation.circleBuffer) fm.map.removeLayer(fm.currentLocation.circleBuffer);
-    			clearInterval(fm.tracking.interval);
-    		}*/
     		fm.map.locate( {
     		    enableHighAccuracy: true,
     		    maximumAge: 0
@@ -106,7 +84,7 @@ html, body{
     	var radius = fm.currentLocation.accuracy / 2;
     
     	// Current location accuracy buffer
-    	if (!fm.currentLocation.circleBuffer){
+    	/*if (!fm.currentLocation.circleBuffer){
     		fm.currentLocation.circleBuffer = new L.Circle(fm.currentLocation.latlng, radius, {
     			stroke: true,
     			weight: 2,
@@ -115,7 +93,7 @@ html, body{
     		fm.map.addLayer(fm.currentLocation.circleBuffer);
     	}else{
     		fm.currentLocation.circleBuffer.setLatLng(fm.currentLocation.latlng);
-    	}
+    	}*/
     
     	// Current location center
     	if (!fm.currentLocation.circleLocation){
@@ -124,7 +102,7 @@ html, body{
     			fill: true,
     			fillOpacity: 1,
     			radius: 6
-    		}).bindPopup("You are at Lat: " + fm.currentLocation.latlng.lat + ", Lon: " + fm.currentLocation.latlng.lng + ".");
+    		}).bindPopup("I think you're are at Lat: " + fm.currentLocation.latlng.lat + ", Lon: " + fm.currentLocation.latlng.lng + ". Accuracy is " + fm.currentLocation.accuracy);
     		fm.map.addLayer(fm.currentLocation.circleLocation);
     	}else{
     		fm.currentLocation.circleLocation.setLatLng(fm.currentLocation.latlng);
@@ -135,28 +113,6 @@ html, body{
     function locationError(){
     	console.log("location error");
     	message("We had problems detecting your location. Try again.", 1000, 1000);
-    }
-    
-    function toggleLocationTracking(/* String */ on_or_off){
-    	if (on_or_off == "on"){
-    		if (!fm.tracking.currentlyTracking){
-    			fm.tracking.currentlyTracking = true;
-    			fm.map.locate({
-    				enableHighAccuracy: true,
-    				maximumAge: 0
-    			});
-    			fm.tracking.interval = setInterval(function(){
-    				fm.map.locate({
-    					enableHighAccuracy: true,
-    					maximumAge: 0
-    				});
-    			}, 10000);
-    		}
-    	}else{
-    		if (fm.currentLocation.circleLocation) fm.map.removeLayer(fm.currentLocation.circleLocation);
-    		if (fm.currentLocation.circleBuffer) fm.map.removeLayer(fm.currentLocation.circleBuffer);
-    		clearInterval(fm.tracking.interval);
-    	}
     }
 </script>
 <script src="/lib/leaflet/dist/leaflet.js" type="text/javascript"></script>
