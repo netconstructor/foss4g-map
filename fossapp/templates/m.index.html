@@ -82,8 +82,8 @@ html, body{
     
     function message(message, displayTime, fadeTime){
     	$('#message').html(message).show().css({
-    		'top':($('#map-container').height()/2)-($('#message').height()/2)+'px',
-    		'left':($('#map-container').width()/2)-($('#message').width()/2)+'px'
+    		'top':($('#map-container').height()/2)-($('#message').outerHeight()/2)+'px',
+    		'left':($('#map-container').width()/2)-($('#message').outerWidth()/2)+'px'
     	});
     	var _displayTime = displayTime || 2000;
     	var _fadeTime = fadeTime || 2000;
