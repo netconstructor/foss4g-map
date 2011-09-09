@@ -50,11 +50,20 @@ class MapSelectController(BaseController):
             zoom = int( request.params["zoom"] )
         else:
             return { "error": True, "message": "No \"zoom\" parameter was found." }
+        
+        is_mobile = False
+        if "mobile" in request.params:
+            if request.params["mobile"] == "true":
+                is_mobile = True
             
         point = Point(lon, lat)
         wkb_point = WKBSpatialElement( buffer( point.wkb ), 4326 )
         
-        distance_meters = pow( 1.8, ( 20 - zoom ) )
+        meters_to_search = 1.8
+        if is_mobile:
+            meters_to_search = 2.1
+        
+        distance_meters = pow( meters_to_search, ( 20 - zoom ) )
         tolerance = metersToDegrees( distance_meters, lat )
         
         features = []

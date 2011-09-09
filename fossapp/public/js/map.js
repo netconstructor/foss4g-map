@@ -163,7 +163,7 @@ function mapLoad(){
 
 function handleMapClick( event ) {
     clearSelection();
-    $.getJSON( "http://foss4g.geojason.info/select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + fm.map.getZoom() + "&callback=?", function( data ) {
+    $.getJSON( "http://foss4g.geojason.info/select?lat=" + event.latlng.lat + "&lon=" + event.latlng.lng + "&zoom=" + fm.map.getZoom() + (fm.isMobile ? "&mobile=true" : "") + "&callback=?", function( data ) {
         if ( data && data.features && data.features.length ) {
             var feature = data.features[0];
             var imageUrl;
