@@ -1,4 +1,6 @@
-var fm = {};
+if ( !fm ) {
+    var fm = {};
+}
 
 fm.baseMaps = [
     {
@@ -120,8 +122,10 @@ $( document ).ready( function() {
 	
 	fm.map.on( "click", handleMapClick );
 	
-	fm.layersControl = new L.Control.Layers( baseMaps, overlayMaps );
-	fm.map.addControl( fm.layersControl );
+	if ( !fm.isMobile ) {
+	    fm.layersControl = new L.Control.Layers( baseMaps, overlayMaps );
+	    fm.map.addControl( fm.layersControl );
+	}
 	
 	fm.poiLayer = new L.GeoJSON();
 	fm.poiLayer.on( "featureparse", function( e ) {
