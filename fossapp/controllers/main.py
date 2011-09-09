@@ -16,4 +16,8 @@ class MainController(BaseController):
     def index(self):
         if self.version.getVersion() == "mobile":
             return render( "/m.index.html" )
-        return render( "/index.html" )
+        #return render( "/index.html" )
+        #
+        # We're going to send everyone to mobile now
+        #
+        return render( "/m.index.html" )

@@ -61,8 +61,7 @@ html, body{
         fm.map.on("locationerror", locationError);
         
         $("#locate").click(function(event){
-    		$(this).find("#img-locate").attr("src", $(this).attr("src") == "img/locate.png" ? "img/locate-on.png" : "img/locate.png"  );
-    		if (!fm.tracking.currentlyTracking){
+    		/*if (!fm.tracking.currentlyTracking){
     			fm.tracking.currentlyTracking = true;
     			fm.map.locate({
     				enableHighAccuracy: true,
@@ -78,7 +77,11 @@ html, body{
     			if (fm.currentLocation.circleLocation) fm.map.removeLayer(fm.currentLocation.circleLocation);
     			if (fm.currentLocation.circleBuffer) fm.map.removeLayer(fm.currentLocation.circleBuffer);
     			clearInterval(fm.tracking.interval);
-    		}
+    		}*/
+    		fm.map.locate( {
+    		    enableHighAccuracy: true,
+    		    maximumAge: 0
+    		} );
     	});
     }
     
