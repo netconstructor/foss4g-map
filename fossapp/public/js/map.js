@@ -159,7 +159,7 @@ function mapLoad(){
         event.stopPropagation();
     } );
     
-    if ( mobileMapLoad ) {
+    if ( window.mobileMapLoad ) {
         mobileMapLoad();
     }
     
