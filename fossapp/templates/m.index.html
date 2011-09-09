@@ -47,6 +47,13 @@ html, body{
         isMobile: true
     };
     
+    fm.currentLocation = {};
+    
+    fm.tracking = {
+    	currentlyTracking: false,
+    	interval: null
+    };
+    
     function mobileMapLoad () {
         $( ".leaflet-bottom.leaflet-right" ).append( '<div id="locate-container"><a href="javascript:void(0);" id="locate"><img src="img/locate.png" id="img-locate" /></a></div>' );
         
