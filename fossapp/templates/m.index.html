@@ -10,6 +10,9 @@
 #map-container{
     height: 100% !important;
 }
+.full{
+    padding: 0 !important;
+}
 </style>
 </%block>
 
@@ -54,11 +57,11 @@ function adjustWindow(){
 		<h1>2011 FOSS4G Map</h1>
 	</div>
 
-	<div data-role="content">	
-		<div id="map-container"></div>		
+	<div data-role="content" class="full">	
+		<div id="map-container" class="full"></div>		
 	</div>
 
 	<div data-role="footer">
-		<h4>awesome Toolbar heeere</h4>
+		<a href="javascript:void(0);" data-icon="star" data-iconpos="top">Locate Me</a>
 	</div>
 </div>
