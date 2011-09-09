@@ -159,6 +159,10 @@ function mapLoad(){
         event.stopPropagation();
     } );
     
+    if ( mobileMapLoad ) {
+        mobileMapLoad();
+    }
+    
 }
 
 function handleMapClick( event ) {
