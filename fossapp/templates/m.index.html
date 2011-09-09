@@ -38,6 +38,23 @@ html, body{
     -moz-box-shadow: 0 0 15px #333;
     -webkit-box-shadow: 0 0 15px #333;
 }
+#message{
+	color: #ffffff;
+	background: rgba(0, 0, 0, 0.65);
+	position: absolute;
+	z-index: 300;
+	padding: 25px 25px;
+	display: none;
+	max-width: 250px;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	text-align: center;
+	font-size: 12px;
+	box-shadow: 0 0 15px #333;
+	-moz-box-shadow: 0 0 15px #333;
+	-webkit-box-shadow: 0 0 15px #333;
+}
 </style>
 </%block>
 
@@ -82,20 +99,7 @@ html, body{
     	fm.map.panTo(fm.currentLocation.latlng);
     
     	var radius = fm.currentLocation.accuracy / 2;
-    
-    	// Current location accuracy buffer
-    	/*if (!fm.currentLocation.circleBuffer){
-    		fm.currentLocation.circleBuffer = new L.Circle(fm.currentLocation.latlng, radius, {
-    			stroke: true,
-    			weight: 2,
-    			fillOpacity: 0.25
-    		}).bindPopup("This is a " + radius + " meter accuracy buffer.");
-    		fm.map.addLayer(fm.currentLocation.circleBuffer);
-    	}else{
-    		fm.currentLocation.circleBuffer.setLatLng(fm.currentLocation.latlng);
-    	}*/
-    
-    	// Current location center
+    	
     	if (!fm.currentLocation.circleLocation){
     		fm.currentLocation.circleLocation = new L.CircleMarker(fm.currentLocation.latlng, {
     			stroke: false,
@@ -106,6 +110,10 @@ html, body{
     		fm.map.addLayer(fm.currentLocation.circleLocation);
     	}else{
     		fm.currentLocation.circleLocation.setLatLng(fm.currentLocation.latlng);
+    	}
+    	if ( !fm.currentLocation.messageSent ) {
+    	    message( "To update your location click the locate icon again.", 2000, 500 );
+    	    fm.currentLocation.messageSent = true;
     	}
     
     }
@@ -118,18 +126,5 @@ html, body{
 <script src="/lib/leaflet/dist/leaflet.js" type="text/javascript"></script>
 <script src="/js/map.js" type="text/javascript"></script>
 </%block>
-
-<!--<div data-role="page">
-
-	<div data-role="header">
-		<h1>2011 FOSS4G Map</h1>
-	</div>
-
-	<div data-role="content" class="full">-->
-		<div id="map-container" class="full"></div>
-	<!--</div>
-
-	<div data-role="footer">
-		<a href="javascript:void(0);" data-icon="star" data-iconpos="top">Locate Me</a>
-	</div>
-</div>-->
+<div id="map-container" class="full"></div>
+<div id="message"></div>
