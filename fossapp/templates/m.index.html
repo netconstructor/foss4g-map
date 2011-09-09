@@ -14,6 +14,9 @@
 .full{
     padding: 0 !important;
 }
+#header, #footer{
+    height: 65px;
+}
 </style>
 </%block>
 
@@ -31,9 +34,9 @@ function adjustWindow(){
 	scroll(0, 0);
 
 	/* Calculate the geometry that our content area should take */
-	var header = $(".ui-header:visible");
-	var footer = $(".ui-footer:visible");
-	var content = $(".ui-content:visible");
+	var header = $("#header");
+	var footer = $("#footer");
+	var content = $("map-container");
 	var viewport_height = $(window).height();
 
 	var content_height = viewport_height - header.outerHeight() - footer.outerHeight();
@@ -52,17 +55,19 @@ function adjustWindow(){
 </script>
 </%block>
 
-<div data-role="page">
+<!--<div data-role="page">
 
 	<div data-role="header">
 		<h1>2011 FOSS4G Map</h1>
 	</div>
 
-	<div data-role="content" class="full">	
-		<div id="map-container" class="full"></div>		
-	</div>
+	<div data-role="content" class="full">-->
+	    <div id="header"></div>
+		<div id="map-container" class="full"></div>
+		<div id="footer"></div>
+	<!--</div>
 
 	<div data-role="footer">
 		<a href="javascript:void(0);" data-icon="star" data-iconpos="top">Locate Me</a>
 	</div>
-</div>
+</div>-->
