@@ -18,6 +18,6 @@ class MainController(BaseController):
             return render( "/m.index.html" )
         #return render( "/index.html" )
         #
-        # We're going to send everyone to mobile now
+        # We're going to send everyone to mobile now, Desktop app is served from 2011.foss4g.org
         #
         return render( "/m.index.html" )
