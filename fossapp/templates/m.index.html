@@ -73,6 +73,7 @@ html, body{
         fm.map.on("locationerror", locationError);
         
         $("#locate").click(function(event){
+            event.stopPropagation();
     		fm.map.locate( {
     		    enableHighAccuracy: true,
     		    maximumAge: 0
